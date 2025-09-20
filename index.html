@@ -414,7 +414,7 @@
                 <a href="#about" class="nav-link text-body-small" style="font-weight: 500;" aria-label="アバウトセクションへ移動">About</a>
                 <a href="#portfolio" class="nav-link text-body-small" style="font-weight: 500;" aria-label="ポートフォリオセクションへ移動">Portfolio</a>
                 <a href="#services" class="nav-link text-body-small" style="font-weight: 500;" aria-label="サービスセクションへ移動">Services</a>
-                <a href="#contact" class="px-6 py-2 rounded-full text-body-small text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" aria-label="コンタクトセクションへ移動">Contact</a>
+                <a href="#contact" class="px-6 py-2 rounded-full text-body-small text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" onmouseover="this.style.background='linear-gradient(135deg, #3B82F6 0%, #1B2C62 100%)'" onmouseout="this.style.background='linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%)'" aria-label="コンタクトセクションへ移動">Contact</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden focus:outline-none text-slate-800 p-2 rounded-lg glass-effect" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -427,7 +427,7 @@
             <a href="#portfolio" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50" style="font-weight: 500;" aria-label="ポートフォリオセクションへ移動">Portfolio</a>
             <a href="#services" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50" style="font-weight: 500;" aria-label="サービスセクションへ移動">Services</a>
             <div class="p-3">
-                <a href="#contact" class="block text-center px-6 py-2 rounded-full text-body-small text-white transition-all duration-300" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" aria-label="コンタクトセクションへ移動">Contact</a>
+                <a href="#contact" class="block text-center px-6 py-2 rounded-full text-body-small text-white transition-all duration-300" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" onmouseover="this.style.background='linear-gradient(135deg, #3B82F6 0%, #1B2C62 100%)'" onmouseout="this.style.background='linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%)'" aria-label="コンタクトセクションへ移動">Contact</a>
             </div>
         </div>
     </header>
@@ -466,7 +466,7 @@
         </section>
 
         <!-- ② About Section - 中峰あらみさんの人柄と経験 -->
-        <section id="about" class="py-20 md:py-32 bg-white relative overflow-hidden">
+        <section id="about" class="py-20 md:py-32 relative overflow-hidden" style="background-color: #F8FAFC;">
             <canvas id="about-canvas" class="absolute inset-0 w-full h-full opacity-20" style="z-index: 1;"></canvas>
             <div class="max-w-[1440px] mx-auto px-6 relative z-10">
                 <div class="text-center mb-20 reveal section-divider relative">
@@ -554,11 +554,11 @@
                                     <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-0.5" style="background: linear-gradient(to right, #1B2C62, #2D4BA8);"></div>
                                 </h3>
                                 <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
-                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">HTML</span>
-                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">CSS(Sass)</span>
-                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">JavaScript</span>
-                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">WordPress</span>
-                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">Figma</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #2563EB; font-weight: 600;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#2563EB'">HTML</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #2563EB; font-weight: 600;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#2563EB'">CSS(Sass)</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #2563EB; font-weight: 600;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#2563EB'">JavaScript</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #2563EB; font-weight: 600;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#2563EB'">WordPress</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #2563EB; font-weight: 600;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#2563EB'">Figma</span>
                                 </div>
                             </div>
                         </div>
@@ -568,7 +568,7 @@
         </section>
 
         <!-- ③ Portfolio Section - 中峰さんの学習成果と実績 -->
-        <section id="portfolio" class="py-20 md:py-32 bg-slate-50">
+        <section id="portfolio" class="py-20 md:py-32" style="background-color: #F8FAFC;">
             <div class="max-w-[1440px] mx-auto px-6">
                 <div class="text-center mb-20 reveal section-divider relative">
                     <h2 class="text-h1 mb-4" style="color: #1B2C62;">Portfolio</h2>
@@ -612,13 +612,13 @@
                             </div>
                             <!-- ステータス行 -->
                             <div class="absolute top-4 left-4 z-10">
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff0000 !important; color: #ffffff !important; font-weight: 500;">noindex（検証用）</span>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #EEF2FF !important; color: #1B2C62 !important; font-weight: 500;">noindex（検証用）</span>
                             </div>
                         </div>
                         <div class="p-8 relative">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-card-title" style="color: #1B2C62;">サービスLP</h3>
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ff00 !important; color: #000000 !important; font-weight: 600;">LP</span>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">LP</span>
                             </div>
                             <!-- 一行概要 -->
                             <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
@@ -629,13 +629,13 @@
                             <div class="flex items-center justify-between">
                                 <!-- Techタグ -->
                                 <div class="flex flex-wrap gap-1.5">
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ffff00 !important; color: #000000 !important; font-weight: 500;">HTML</span>
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff00ff !important; color: #ffffff !important; font-weight: 500;">Sass</span>
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ffff !important; color: #000000 !important; font-weight: 500;">JS</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">HTML</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">Sass</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">JS</span>
                                 </div>
                                 
                                 <!-- 詳しく見る -->
-                                <span class="text-caption" style="color: #ff0000 !important; font-weight: 500;">詳しく見る ›</span>
+                                <span class="text-caption" style="color: #2563EB !important; font-weight: 600; text-decoration: underline;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#2563EB'">詳しく見る ›</span>
                             </div>
                         </div>
                     </div>
@@ -644,28 +644,28 @@
                     <div class="portfolio-card reveal glass-effect rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-white/20 relative" style="transition-delay: 200ms;" role="button" tabindex="0" onclick="openPortfolioDetail('koumuten')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openPortfolioDetail('koumuten');}">
                         <div class="relative overflow-hidden">
                             <!-- 制作会社向け：実装画面のプレビュー風 -->
-                            <div class="w-full h-56 bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center relative p-4">
+                            <div class="w-full h-56 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center relative p-4">
                                 <!-- デバイスモックアップ（PC+スマホ） -->
                                 <div class="relative z-10">
                                     <!-- PC画面 -->
                                     <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
                                         <div class="bg-white rounded-md w-40 h-24 flex flex-col">
-                                            <div class="bg-orange-500 h-2 rounded-t-md"></div>
+                                            <div class="bg-blue-500 h-2 rounded-t-md"></div>
                                             <div class="p-2 flex-1 space-y-1">
                                                 <div class="bg-slate-200 h-1 rounded w-full"></div>
                                                 <div class="bg-slate-200 h-1 rounded w-3/4"></div>
-                                                <div class="bg-orange-400 h-3 rounded w-16 mx-auto"></div>
+                                                <div class="bg-blue-400 h-3 rounded w-16 mx-auto"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- スマホ画面 -->
                                     <div class="absolute -bottom-2 -right-6 bg-slate-700 rounded-lg p-1 shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-500">
                                         <div class="bg-white rounded w-8 h-14 flex flex-col">
-                                            <div class="bg-orange-500 h-1 rounded-t"></div>
+                                            <div class="bg-blue-500 h-1 rounded-t"></div>
                                             <div class="p-1 flex-1 space-y-0.5">
                                                 <div class="bg-slate-200 h-0.5 rounded w-full"></div>
                                                 <div class="bg-slate-200 h-0.5 rounded w-2/3"></div>
-                                                <div class="bg-orange-400 h-1.5 rounded w-4 mx-auto"></div>
+                                                <div class="bg-blue-400 h-1.5 rounded w-4 mx-auto"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -677,13 +677,13 @@
                             </div>
                             <!-- ステータス行 -->
                             <div class="absolute top-4 left-4 z-10">
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff0000 !important; color: #ffffff !important; font-weight: 500;">noindex（検証用）</span>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #EEF2FF !important; color: #1B2C62 !important; font-weight: 500;">noindex（検証用）</span>
                             </div>
                         </div>
                         <div class="p-8 relative">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-card-title" style="color: #1B2C62;">工務店サイト</h3>
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #0000ff !important; color: #ffffff !important; font-weight: 600;">Corp</span>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">Corp</span>
                             </div>
                             <!-- 一行概要 -->
                             <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
@@ -694,13 +694,13 @@
                             <div class="flex items-center justify-between">
                                 <!-- Techタグ -->
                                 <div class="flex flex-wrap gap-1.5">
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ffff00 !important; color: #000000 !important; font-weight: 500;">HTML</span>
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff00ff !important; color: #ffffff !important; font-weight: 500;">Sass</span>
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ffff !important; color: #000000 !important; font-weight: 500;">JS</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">HTML</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">Sass</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">JS</span>
                                 </div>
                                 
                                 <!-- 詳しく見る -->
-                                <span class="text-caption" style="color: #ff0000 !important; font-weight: 500;">詳しく見る ›</span>
+                                <span class="text-caption" style="color: #2563EB !important; font-weight: 600; text-decoration: underline;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#2563EB'">詳しく見る ›</span>
                             </div>
                         </div>
                     </div>
@@ -709,28 +709,28 @@
                     <div class="portfolio-card reveal glass-effect rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-white/20 relative" style="transition-delay: 400ms;" role="button" tabindex="0" onclick="openPortfolioDetail('saiyou')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openPortfolioDetail('saiyou');}">
                         <div class="relative overflow-hidden">
                             <!-- 制作会社向け：実装画面のプレビュー風 -->
-                            <div class="w-full h-56 bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center relative p-4">
+                            <div class="w-full h-56 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center relative p-4">
                                 <!-- デバイスモックアップ（PC+スマホ） -->
                                 <div class="relative z-10">
                                     <!-- PC画面 -->
                                     <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
                                         <div class="bg-white rounded-md w-40 h-24 flex flex-col">
-                                            <div class="bg-green-500 h-2 rounded-t-md"></div>
+                                            <div class="bg-blue-500 h-2 rounded-t-md"></div>
                                             <div class="p-2 flex-1 space-y-1">
                                                 <div class="bg-slate-200 h-1 rounded w-full"></div>
                                                 <div class="bg-slate-200 h-1 rounded w-3/4"></div>
-                                                <div class="bg-green-400 h-3 rounded w-16 mx-auto"></div>
+                                                <div class="bg-blue-400 h-3 rounded w-16 mx-auto"></div>
                                             </div>
                                         </div>
                                     </div>
                                     <!-- スマホ画面 -->
                                     <div class="absolute -bottom-2 -right-6 bg-slate-700 rounded-lg p-1 shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-500">
                                         <div class="bg-white rounded w-8 h-14 flex flex-col">
-                                            <div class="bg-green-500 h-1 rounded-t"></div>
+                                            <div class="bg-blue-500 h-1 rounded-t"></div>
                                             <div class="p-1 flex-1 space-y-0.5">
                                                 <div class="bg-slate-200 h-0.5 rounded w-full"></div>
                                                 <div class="bg-slate-200 h-0.5 rounded w-2/3"></div>
-                                                <div class="bg-green-400 h-1.5 rounded w-4 mx-auto"></div>
+                                                <div class="bg-blue-400 h-1.5 rounded w-4 mx-auto"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -741,13 +741,13 @@
                             </div>
                             <!-- ステータス行 -->
                             <div class="absolute top-4 left-4 z-10">
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff0000 !important; color: #ffffff !important; font-weight: 500;">noindex（検証用）</span>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #EEF2FF !important; color: #1B2C62 !important; font-weight: 500;">noindex（検証用）</span>
                             </div>
                         </div>
                         <div class="p-8 relative">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-card-title" style="color: #1B2C62;">採用特設サイト</h3>
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #0000ff !important; color: #ffffff !important; font-weight: 600;">Corp</span>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">Corp</span>
                             </div>
                             <!-- 一行概要 -->
                             <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
@@ -758,14 +758,14 @@
                             <div class="flex items-center justify-between">
                                 <!-- Techタグ -->
                                 <div class="flex flex-wrap gap-1.5">
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ffff00 !important; color: #000000 !important; font-weight: 500;">HTML</span>
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff00ff !important; color: #ffffff !important; font-weight: 500;">Sass</span>
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ffff !important; color: #000000 !important; font-weight: 500;">JS</span>
-                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff8000 !important; color: #ffffff !important; font-weight: 500;">WP</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">HTML</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">Sass</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">JS</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #2563EB !important; color: #ffffff !important; font-weight: 600; border: 1px solid #2563EB;">WP</span>
                                 </div>
                                 
                                 <!-- 詳しく見る -->
-                                <span class="text-caption" style="color: #ff0000 !important; font-weight: 500;">詳しく見る ›</span>
+                                <span class="text-caption" style="color: #2563EB !important; font-weight: 600; text-decoration: underline;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#2563EB'">詳しく見る ›</span>
                             </div>
                         </div>
                     </div>
@@ -775,11 +775,11 @@
         </section>
 
         <!-- ④ Services Section - 中峰さんならではのサービス -->
-        <section id="services" class="py-20 md:py-32 relative overflow-hidden" style="background-color: #1B2C62;">
+        <section id="services" class="py-20 md:py-32 relative overflow-hidden" style="background-color: #EEF2FF;">
             <canvas id="services-canvas" class="absolute inset-0 w-full h-full opacity-15" style="z-index: 1;"></canvas>
             <div class="max-w-[1440px] mx-auto px-6 relative z-10">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-h1 mb-4 text-white">Services</h2>
+                    <h2 class="text-h1 mb-4" style="color: #1B2C62;">Services</h2>
                     <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">提供サービス</p>
                 </div>
                 
@@ -819,7 +819,7 @@
                                     
                                     <!-- CTA -->
                                     <div class="flex items-center justify-end mt-auto">
-                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;">
+                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#1B2C62'">
                                             詳しく見る
                                         </button>
                                     </div>
@@ -863,7 +863,7 @@
                                     
                                     <!-- CTA -->
                                     <div class="flex items-center justify-end mt-auto">
-                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;">
+                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#1B2C62'">
                                             詳しく見る
                                         </button>
                                     </div>
@@ -907,7 +907,7 @@
                                     
                                     <!-- CTA -->
                                     <div class="flex items-center justify-end mt-auto">
-                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;">
+                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#1B2C62'">
                                             詳しく見る
                                         </button>
                                     </div>
@@ -920,11 +920,11 @@
         </section>
 
         <!-- ⑤ Contact Section -->
-        <section id="contact" class="py-20 md:py-32 bg-white">
+        <section id="contact" class="py-20 md:py-32" style="background-color: #F8FAFC;">
             <div class="max-w-[1440px] mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-h1 mb-4" style="color: #1B2C62;">Contact</h2>
-                    <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">お気軽にご相談ください</p>
+                    <p class="text-body-large" style="color: #2563EB; font-weight: 300;">お気軽にご相談ください</p>
                 </div>
                 
                 <div class="max-w-2xl mx-auto text-center mb-8 reveal">
@@ -949,7 +949,7 @@
                             <textarea name="message" id="message" rows="4" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
                         </div>
                         <div class="text-center pt-4">
-                            <button type="submit" id="submit-btn" class="inline-block text-body-small text-white font-medium py-3 px-10 rounded-full hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-blue-300" style="background: linear-gradient(to right, #1B2C62, #2D4BA8);">
+                            <button type="submit" id="submit-btn" class="inline-block text-body-small text-white font-medium py-3 px-10 rounded-full hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-blue-300" style="background: linear-gradient(to right, #1B2C62, #2D4BA8);" onmouseover="this.style.background='linear-gradient(to right, #3B82F6, #1B2C62)'" onmouseout="this.style.background='linear-gradient(to right, #1B2C62, #2D4BA8)'">
                                 送信する
                             </button>
                         </div>
