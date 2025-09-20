@@ -1,0 +1,2286 @@
+<!DOCTYPE html>
+<html lang="ja" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>habataki create - 中峰あらみ | Webコーダー</title>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    
+    <!-- Tailwind CSSの読み込み -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Tailwind CSS設定でブランドカラーを上書き
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-light': 'rgba(27, 44, 98, 0.05)',
+                        'brand-medium': 'rgba(27, 44, 98, 0.08)',
+                        'brand-strong': 'rgba(27, 44, 98, 0.1)',
+                        'brand-text': '#1B2C62'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts (洗練されたタイポグラフィ) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Three.jsの読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+
+    <!-- ▼ OGP・Twitterカード設定（SNSサムネイル用） ▼ -->
+    <meta property="og:title" content="habataki create - 中峰あらみ | Webコーダー" />
+    <meta property="og:description" content="制作会社様向け高品質コーディングサービス。デザインを忠実に再現し、レスポンシブ・保守まで安心してお任せください。" />
+    <meta property="og:image" content="https://example.com/nakamine_site/images/og-image.png" />
+    <meta property="og:url" content="https://example.com/nakamine_site/" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="habataki create - 中峰あらみ | Webコーダー" />
+    <meta name="twitter:description" content="制作会社様向け高品質コーディングサービス。デザインを忠実に再現し、レスポンシブ・保守まで安心してお任せください。" />
+
+    <style>
+        /* タイポグラフィシステム - Figma設定に基づく統一化 */
+        :root {
+            /* Display (Hero見出し) */
+            --font-display: 40px;
+            --font-display-weight: 680;
+            --font-display-line-height: 1.1;
+            
+            /* Heading 1 (セクション見出し) */
+            --font-h1: 48px;
+            --font-h1-weight: 600;
+            --font-h1-line-height: 1.2;
+            
+            /* Heading 2 (カードタイトル) */
+            --font-h2: 36px;
+            --font-h2-weight: 600;
+            --font-h2-line-height: 1.3;
+            
+            /* Body (本文) */
+            --font-body: 16px;
+            --font-body-weight: 400;
+            --font-body-line-height: 1.6;
+            
+            /* Body Large (カード概要) */
+            --font-body-large: 20px;
+            --font-body-large-weight: 400;
+            --font-body-large-line-height: 1.5;
+            
+            /* Body Small (小本文) */
+            --font-body-small: 14px;
+            --font-body-small-weight: 500;
+            --font-body-small-line-height: 1.7;
+            
+            /* Caption (キャプション) */
+            --font-caption: 12px;
+            --font-caption-weight: 400;
+            --font-caption-line-height: 1.8;
+            
+            /* Meta (チップ・注釈) */
+            --font-meta: 13px;
+            --font-meta-weight: 500;
+            --font-meta-line-height: 1.5;
+            
+            /* Card Title (カードタイトル) */
+            --font-card-title: 24px;
+            --font-card-title-weight: 700;
+            --font-card-title-line-height: 1.3;
+            
+            /* Section Subheading (セクション小見出し) */
+            --font-section-subheading: 24px;
+            --font-section-subheading-weight: 600;
+            --font-section-subheading-line-height: 1.3;
+        }
+        
+        /* タイポグラフィユーティリティクラス */
+        .text-display { 
+            font-size: var(--font-display); 
+            font-weight: var(--font-display-weight); 
+            line-height: var(--font-display-line-height); 
+        }
+        .text-h1 { 
+            font-size: var(--font-h1); 
+            font-weight: var(--font-h1-weight); 
+            line-height: var(--font-h1-line-height); 
+        }
+        .text-h2 { 
+            font-size: var(--font-h2); 
+            font-weight: var(--font-h2-weight); 
+            line-height: var(--font-h2-line-height); 
+        }
+        .text-body { 
+            font-size: var(--font-body); 
+            font-weight: var(--font-body-weight); 
+            line-height: var(--font-body-line-height); 
+        }
+        .text-body-large { 
+            font-size: var(--font-body-large); 
+            font-weight: var(--font-body-large-weight); 
+            line-height: var(--font-body-large-line-height); 
+        }
+        .text-body-small { 
+            font-size: var(--font-body-small); 
+            font-weight: var(--font-body-small-weight); 
+            line-height: var(--font-body-small-line-height); 
+        }
+        .text-caption { 
+            font-size: var(--font-caption); 
+            font-weight: var(--font-caption-weight); 
+            line-height: var(--font-caption-line-height); 
+        }
+        .text-meta { 
+            font-size: var(--font-meta); 
+            font-weight: var(--font-meta-weight); 
+            line-height: var(--font-meta-line-height); 
+        }
+        .text-card-title { 
+            font-size: var(--font-card-title); 
+            font-weight: var(--font-card-title-weight); 
+            line-height: var(--font-card-title-line-height); 
+        }
+        .text-section-subheading { 
+            font-size: var(--font-section-subheading); 
+            font-weight: var(--font-section-subheading-weight); 
+            line-height: var(--font-section-subheading-line-height); 
+        }
+        
+        /* ヘッダーロゴ用のクラス */
+        .text-logo {
+            font-size: 24px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        /* 中峰さんブランドカラー - glass-effectを考慮した強力な適用 */
+        .portfolio-card.glass-effect span.text-xs {
+            background-color: rgba(27, 44, 98, 0.05) !important;
+            color: #1B2C62 !important;
+        }
+        
+        /* より強力なセレクター */
+        div.portfolio-card.glass-effect span.text-xs {
+            background-color: rgba(27, 44, 98, 0.05) !important;
+            color: #1B2C62 !important;
+        }
+        
+        /* 最高優先度 */
+        html body div.portfolio-card.glass-effect span.text-xs {
+            background-color: rgba(27, 44, 98, 0.05) !important;
+            color: #1B2C62 !important;
+        }
+        
+        /* 洗練されたカスタムスタイル */
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            color: #1e293b;
+            letter-spacing: -0.01em;
+            line-height: 1.65;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Noto Sans JP', sans-serif;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .font-inter { font-family: 'Noto Sans JP', sans-serif; }
+        .font-display { font-family: 'Noto Sans JP', sans-serif; }
+
+        /* プレミアムアニメーション */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px) scale(0.98);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        /* グラスモーフィズム効果 */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
+
+        /* Three.js背景 */
+        #bg-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.3;
+        }
+
+        /* 上品なナビゲーション */
+        nav a {
+            position: relative;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-weight: 500;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #3b82f6, #6366f1);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+            border-radius: 1px;
+        }
+        
+        nav a.active,
+        nav a:hover {
+            color: #3b82f6;
+        }
+        
+        nav a.active::after,
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* エレガントなホバー効果 */
+        .elegant-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .elegant-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(99, 102, 241, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: inherit;
+        }
+        
+        .elegant-hover:hover::before {
+            opacity: 1;
+        }
+        
+        .elegant-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -8px rgba(59, 130, 246, 0.25), 0 8px 20px -4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ポートフォリオカード - より洗練された */
+        .portfolio-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .portfolio-card:hover::before {
+            opacity: 1;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                0 8px 20px -4px rgba(59, 130, 246, 0.1);
+        }
+
+        /* グラデーションテキスト */
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        /* エレガントなボタン */
+        .elegant-button {
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            font-weight: 600;
+            letter-spacing: 0.02em;
+        }
+        
+        .elegant-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .elegant-button:hover::before {
+            left: 100%;
+        }
+
+        /* 微細なアニメーション */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .float-animation {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        /* セクション区切り */
+        .section-divider::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
+            transform: translateX(-50%);
+        }
+        
+        /* パルス効果のアニメーション */
+        @keyframes pulse-ring {
+            0% {
+                transform: translate(-50%, -50%) scale(0.8);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 0;
+            }
+        }
+        
+        .pulse-ring {
+            animation: pulse-ring 3s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        
+        /* 強みアイコンのホバー効果 */
+        .strength-icon {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .strength-icon:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- Three.js アニメーション用キャンバス -->
+    <div id="bg-canvas"></div>
+
+    <!-- ヘッダー（洗練されたデザイン） -->
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect border-b border-white/20 shadow-xl">
+        <div class="max-w-[1440px] mx-auto px-6 py-5 flex justify-between items-center">
+            <a href="#hero" class="text-logo gradient-text tracking-wide">habataki create</a>
+            <nav class="hidden md:flex items-center space-x-10 text-slate-600" role="navigation" aria-label="メインナビゲーション">
+                <a href="#home" class="nav-link text-body-small" style="font-weight: 500;" aria-label="ホームセクションへ移動">Home</a>
+                <a href="#about" class="nav-link text-body-small" style="font-weight: 500;" aria-label="アバウトセクションへ移動">About</a>
+                <a href="#portfolio" class="nav-link text-body-small" style="font-weight: 500;" aria-label="ポートフォリオセクションへ移動">Portfolio</a>
+                <a href="#services" class="nav-link text-body-small" style="font-weight: 500;" aria-label="サービスセクションへ移動">Services</a>
+                <a href="#contact" class="px-6 py-2 rounded-full text-body-small text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" aria-label="コンタクトセクションへ移動">Contact</a>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none text-slate-800 p-2 rounded-lg glass-effect" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <!-- モバイルメニュー -->
+        <div id="mobile-menu" class="hidden md:hidden glass-effect border-t border-white/20" role="navigation" aria-label="モバイルナビゲーション">
+            <a href="#home" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50" style="font-weight: 500;" aria-label="ホームセクションへ移動">Home</a>
+            <a href="#about" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50" style="font-weight: 500;" aria-label="アバウトセクションへ移動">About</a>
+            <a href="#portfolio" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50" style="font-weight: 500;" aria-label="ポートフォリオセクションへ移動">Portfolio</a>
+            <a href="#services" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50" style="font-weight: 500;" aria-label="サービスセクションへ移動">Services</a>
+            <div class="p-3">
+                <a href="#contact" class="block text-center px-6 py-2 rounded-full text-body-small text-white transition-all duration-300" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" aria-label="コンタクトセクションへ移動">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- メインコンテンツ -->
+    <main class="relative z-10">
+        <!-- ① Hero Section - 洗練されたデザイン -->
+        <section id="home" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%);">
+            <canvas id="home-canvas" class="absolute inset-0 w-full h-full opacity-15" style="z-index: 1;"></canvas>
+            <div class="relative max-w-[1440px] mx-auto px-6 z-10">
+                
+                <!-- メインキャッチコピー -->
+                <h1 class="text-display tracking-tight reveal mb-8">
+                    <span class="text-white">デザインを</span><span style="color: #F3B93D;">忠実に再現する</span><span class="text-white">、正確なコーディング</span>
+                </h1>
+                
+                <!-- サブタイトル -->
+                <p class="mt-4 text-body-large text-white/90 reveal" style="transition-delay: 200ms; font-weight: 300; line-height: 1.6;">
+                    支給デザインを現場基準で再現。レスポンシブ・WordPressまで一貫対応。
+                </p>
+                
+                
+                <!-- 下向き矢印 -->
+                <div class="absolute -bottom-20 left-1/2 -translate-x-1/2 animate-bounce mt-8">
+                    <a href="#about">
+                        <svg class="w-8 h-8 text-slate-500" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
+                            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                        </svg>
+                    </a>
+                </div>
+                
+                <!-- 装飾要素 -->
+                <div class="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-blue-200/20 to-indigo-300/20 rounded-full blur-3xl float-animation"></div>
+                <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-gradient-to-br from-blue-200/20 to-indigo-300/20 rounded-full blur-3xl float-animation" style="animation-delay: -3s;"></div>
+            </div>
+        </section>
+
+        <!-- ② About Section - 中峰あらみさんの人柄と経験 -->
+        <section id="about" class="py-20 md:py-32 bg-white relative overflow-hidden">
+            <canvas id="about-canvas" class="absolute inset-0 w-full h-full opacity-20" style="z-index: 1;"></canvas>
+            <div class="max-w-[1440px] mx-auto px-6 relative z-10">
+                <div class="text-center mb-20 reveal section-divider relative">
+                    <h2 class="text-h1 mb-4" style="color: #1B2C62;">About</h2>
+                    <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">私について</p>
+                </div>
+                
+                <div class="max-w-[1120px] mx-auto">
+                    <!-- About Single Card -->
+                    <div class="relative overflow-hidden rounded-3xl md:rounded-[2rem] p-8 md:p-9 shadow-xl reveal bg-gradient-to-br from-white to-blue-50/60 border border-white/50" style="box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);">
+                        <div class="absolute -top-20 -right-20 w-72 h-72 bg-gradient-to-br from-blue-200/40 to-indigo-200/40 rounded-full blur-3xl"></div>
+                        <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl"></div>
+                        <div class="relative z-10 max-w-[1440px] mx-auto">
+                            <!-- プロフィール基本情報（リファレンス構造） -->
+                            <div class="max-w-[1120px] mx-auto grid md:grid-cols-3 gap-12 items-center mb-20">
+                                <!-- 左：プロフィール画像（1/3幅） -->
+                                <div class="md:col-span-1 flex justify-center">
+                                    <div class="w-48 h-48 rounded-full bg-gradient-to-br from-blue-100 to-blue-200 border-4 border-white shadow-lg flex items-center justify-center">
+                                        <div class="text-center">
+                                            <div class="text-slate-600 text-body-small" style="font-weight: 500;">プロフィール画像</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 右：プロフィール情報（2/3幅） -->
+                                <div class="md:col-span-2 text-center md:text-left">
+                                    <h3 class="text-h1 mb-2" style="color: #1B2C62;">中峰あらみ</h3>
+                                    <p class="text-body-large mb-4" style="color: #F3B93D;">Web Coder</p>
+                                    <p class="text-body text-slate-600">
+                                        経理職として8年間従事し、数字の正確性と納期厳守の姿勢を培ってきました。 その経験は「最後まで責任を持ち、正確に仕上げる」という現在の制作スタイルに直結しています。 現在はWebコーダーとして、デザインデータを1px単位で忠実に再現し、PC・スマホ両方のレスポンシブ対応やWordPress実装まで、現場基準のクオリティで対応しています。 相談しやすさと柔軟な調整力を強みに、制作会社様にとって「安心して任せられる外注パートナー」を目指しています。
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- 強み（独立セクション） -->
+                            <div class="mt-20">
+                                <h3 class="text-h2 text-center mb-10" style="color: #1B2C62;">Strengths</h3>
+                                <div class="grid md:grid-cols-3 gap-8 max-w-[1120px] mx-auto">
+                                    <!-- 強み1: 正確性・再現性 -->
+                                    <div class="group">
+                                        <div class="relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:shadow-lg text-center" style="background: linear-gradient(135deg, #1B2C6215, #1B2C6208); border: 1px solid #1B2C6220;">
+                                            <div class="absolute top-0 right-0 w-16 h-16 opacity-10" style="background: radial-gradient(circle, #1B2C62 0%, transparent 70%);"></div>
+                                            <div class="relative z-10">
+                                                <svg class="w-8 h-8 mx-auto mb-4" style="color: #1B2C62;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                <h4 class="text-card-title text-slate-800">正確性・再現性</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 強み2: 柔軟性・対応力 -->
+                                    <div class="group">
+                                        <div class="relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:shadow-lg text-center" style="background: linear-gradient(135deg, #2D4BA815, #2D4BA808); border: 1px solid #2D4BA820;">
+                                            <div class="absolute top-0 right-0 w-16 h-16 opacity-10" style="background: radial-gradient(circle, #2D4BA8 0%, transparent 70%);"></div>
+                                            <div class="relative z-10">
+                                                <svg class="w-8 h-8 mx-auto mb-4" style="color: #2D4BA8;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                                </svg>
+                                                <h4 class="text-card-title text-slate-800">柔軟性・対応力</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 強み3: 責任感・継続力 -->
+                                    <div class="group">
+                                        <div class="relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:shadow-lg text-center" style="background: linear-gradient(135deg, #1B2C6215, #1B2C6208); border: 1px solid #1B2C6220;">
+                                            <div class="absolute top-0 right-0 w-16 h-16 opacity-10" style="background: radial-gradient(circle, #1B2C62 0%, transparent 70%);"></div>
+                                            <div class="relative z-10">
+                                                <svg class="w-8 h-8 mx-auto mb-4" style="color: #1B2C62;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                                </svg>
+                                                <h4 class="text-card-title text-slate-800">責任感・継続力</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <!-- 下段：Skills（全幅中央配置） -->
+                            <div class="text-center mt-24">
+                                <h3 class="text-h2 mb-8 relative inline-block" style="color: #1B2C62;">
+                                    Skills
+                                    <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-0.5" style="background: linear-gradient(to right, #1B2C62, #2D4BA8);"></div>
+                                </h3>
+                                <div class="flex flex-wrap justify-center gap-4 max-w-4xl mx-auto">
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">HTML</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">CSS(Sass)</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">JavaScript</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">WordPress</span>
+                                    <span class="px-6 py-3 text-white rounded-full text-body-small cursor-pointer transition-all duration-300 shadow-md hover:shadow-lg hover:-translate-y-1" style="background-color: #1B2C62; font-weight: 500;">Figma</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ③ Portfolio Section - 中峰さんの学習成果と実績 -->
+        <section id="portfolio" class="py-20 md:py-32 bg-slate-50">
+            <div class="max-w-[1440px] mx-auto px-6">
+                <div class="text-center mb-20 reveal section-divider relative">
+                    <h2 class="text-h1 mb-4" style="color: #1B2C62;">Portfolio</h2>
+                    <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">これまでの制作実績</p>
+                </div>
+                
+                <div class="max-w-[1120px] mx-auto grid md:grid-cols-3 gap-8">
+                    <!-- Portfolio Card 1: サービスLP（CareSend） -->
+                    <div class="portfolio-card reveal glass-effect rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-white/20 relative" role="button" tabindex="0" onclick="openPortfolioDetail('caresend')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openPortfolioDetail('caresend');}">
+                        <div class="relative overflow-hidden">
+                            <!-- 制作会社向け：実装画面のプレビュー風 -->
+                            <div class="w-full h-56 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center relative p-4">
+                                <!-- デバイスモックアップ（PC+スマホ） -->
+                                <div class="relative z-10">
+                                    <!-- PC画面 -->
+                                    <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
+                                        <div class="bg-white rounded-md w-40 h-24 flex flex-col">
+                                            <div class="bg-blue-500 h-2 rounded-t-md"></div>
+                                            <div class="p-2 flex-1 space-y-1">
+                                                <div class="bg-slate-200 h-1 rounded w-full"></div>
+                                                <div class="bg-slate-200 h-1 rounded w-3/4"></div>
+                                                <div class="bg-blue-400 h-3 rounded w-16 mx-auto"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- スマホ画面 -->
+                                    <div class="absolute -bottom-2 -right-6 bg-slate-700 rounded-lg p-1 shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-500">
+                                        <div class="bg-white rounded w-8 h-14 flex flex-col">
+                                            <div class="bg-blue-500 h-1 rounded-t"></div>
+                                            <div class="p-1 flex-1 space-y-0.5">
+                                                <div class="bg-slate-200 h-0.5 rounded w-full"></div>
+                                                <div class="bg-slate-200 h-0.5 rounded w-2/3"></div>
+                                                <div class="bg-blue-400 h-1.5 rounded w-4 mx-auto"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 装飾要素 -->
+                                <div class="absolute top-2 right-2 w-8 h-8 bg-blue-200/20 rounded-full blur-sm"></div>
+                                <div class="absolute bottom-4 left-4 w-6 h-6 bg-indigo-200/20 rounded-full blur-sm"></div>
+                            </div>
+                            <!-- ステータス行 -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff0000 !important; color: #ffffff !important; font-weight: 500;">noindex（検証用）</span>
+                            </div>
+                        </div>
+                        <div class="p-8 relative">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-card-title" style="color: #1B2C62;">サービスLP</h3>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ff00 !important; color: #000000 !important; font-weight: 600;">LP</span>
+                            </div>
+                            <!-- 一行概要 -->
+                            <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
+                                固定ヘッダー・ハンバーガー・フォーム埋め込みなど基本機能を実装。検証用途で軽量設計。
+                            </p>
+                            
+                            <!-- フッター行 -->
+                            <div class="flex items-center justify-between">
+                                <!-- Techタグ -->
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ffff00 !important; color: #000000 !important; font-weight: 500;">HTML</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff00ff !important; color: #ffffff !important; font-weight: 500;">Sass</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ffff !important; color: #000000 !important; font-weight: 500;">JS</span>
+                                </div>
+                                
+                                <!-- 詳しく見る -->
+                                <span class="text-caption" style="color: #ff0000 !important; font-weight: 500;">詳しく見る ›</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Card 2: 工務店サイト（コーポレート） -->
+                    <div class="portfolio-card reveal glass-effect rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-white/20 relative" style="transition-delay: 200ms;" role="button" tabindex="0" onclick="openPortfolioDetail('koumuten')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openPortfolioDetail('koumuten');}">
+                        <div class="relative overflow-hidden">
+                            <!-- 制作会社向け：実装画面のプレビュー風 -->
+                            <div class="w-full h-56 bg-gradient-to-br from-orange-50 to-amber-50 flex items-center justify-center relative p-4">
+                                <!-- デバイスモックアップ（PC+スマホ） -->
+                                <div class="relative z-10">
+                                    <!-- PC画面 -->
+                                    <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
+                                        <div class="bg-white rounded-md w-40 h-24 flex flex-col">
+                                            <div class="bg-orange-500 h-2 rounded-t-md"></div>
+                                            <div class="p-2 flex-1 space-y-1">
+                                                <div class="bg-slate-200 h-1 rounded w-full"></div>
+                                                <div class="bg-slate-200 h-1 rounded w-3/4"></div>
+                                                <div class="bg-orange-400 h-3 rounded w-16 mx-auto"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- スマホ画面 -->
+                                    <div class="absolute -bottom-2 -right-6 bg-slate-700 rounded-lg p-1 shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-500">
+                                        <div class="bg-white rounded w-8 h-14 flex flex-col">
+                                            <div class="bg-orange-500 h-1 rounded-t"></div>
+                                            <div class="p-1 flex-1 space-y-0.5">
+                                                <div class="bg-slate-200 h-0.5 rounded w-full"></div>
+                                                <div class="bg-slate-200 h-0.5 rounded w-2/3"></div>
+                                                <div class="bg-orange-400 h-1.5 rounded w-4 mx-auto"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 装飾要素 -->
+                                <div class="absolute top-3 right-8 w-3 h-3 bg-orange-300/40 rounded-full"></div>
+                                <div class="absolute bottom-8 left-8 w-2 h-2 bg-amber-300/40 rounded-full"></div>
+                                <div class="absolute top-8 left-12 w-1 h-1 bg-orange-400/60 rounded-full"></div>
+                            </div>
+                            <!-- ステータス行 -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff0000 !important; color: #ffffff !important; font-weight: 500;">noindex（検証用）</span>
+                            </div>
+                        </div>
+                        <div class="p-8 relative">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-card-title" style="color: #1B2C62;">工務店サイト</h3>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #0000ff !important; color: #ffffff !important; font-weight: 600;">Corp</span>
+                            </div>
+                            <!-- 一行概要 -->
+                            <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
+                                初回ローディング・モーダル・スムーススクロール等のUIを実装。スマホまでレスポンシブ調整済み。
+                            </p>
+                            
+                            <!-- フッター行 -->
+                            <div class="flex items-center justify-between">
+                                <!-- Techタグ -->
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ffff00 !important; color: #000000 !important; font-weight: 500;">HTML</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff00ff !important; color: #ffffff !important; font-weight: 500;">Sass</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ffff !important; color: #000000 !important; font-weight: 500;">JS</span>
+                                </div>
+                                
+                                <!-- 詳しく見る -->
+                                <span class="text-caption" style="color: #ff0000 !important; font-weight: 500;">詳しく見る ›</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Card 3: 採用特設サイト -->
+                    <div class="portfolio-card reveal glass-effect rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-white/20 relative" style="transition-delay: 400ms;" role="button" tabindex="0" onclick="openPortfolioDetail('saiyou')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openPortfolioDetail('saiyou');}">
+                        <div class="relative overflow-hidden">
+                            <!-- 制作会社向け：実装画面のプレビュー風 -->
+                            <div class="w-full h-56 bg-gradient-to-br from-green-50 to-emerald-50 flex items-center justify-center relative p-4">
+                                <!-- デバイスモックアップ（PC+スマホ） -->
+                                <div class="relative z-10">
+                                    <!-- PC画面 -->
+                                    <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
+                                        <div class="bg-white rounded-md w-40 h-24 flex flex-col">
+                                            <div class="bg-green-500 h-2 rounded-t-md"></div>
+                                            <div class="p-2 flex-1 space-y-1">
+                                                <div class="bg-slate-200 h-1 rounded w-full"></div>
+                                                <div class="bg-slate-200 h-1 rounded w-3/4"></div>
+                                                <div class="bg-green-400 h-3 rounded w-16 mx-auto"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- スマホ画面 -->
+                                    <div class="absolute -bottom-2 -right-6 bg-slate-700 rounded-lg p-1 shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-500">
+                                        <div class="bg-white rounded w-8 h-14 flex flex-col">
+                                            <div class="bg-green-500 h-1 rounded-t"></div>
+                                            <div class="p-1 flex-1 space-y-0.5">
+                                                <div class="bg-slate-200 h-0.5 rounded w-full"></div>
+                                                <div class="bg-slate-200 h-0.5 rounded w-2/3"></div>
+                                                <div class="bg-green-400 h-1.5 rounded w-4 mx-auto"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- 装飾要素 -->
+                                <div class="absolute top-2 right-2 w-8 h-8 bg-green-200/20 rounded-full blur-sm"></div>
+                                <div class="absolute bottom-4 left-4 w-6 h-6 bg-emerald-200/20 rounded-full blur-sm"></div>
+                            </div>
+                            <!-- ステータス行 -->
+                            <div class="absolute top-4 left-4 z-10">
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff0000 !important; color: #ffffff !important; font-weight: 500;">noindex（検証用）</span>
+                            </div>
+                        </div>
+                        <div class="p-8 relative">
+                            <div class="flex items-center justify-between mb-3">
+                                <h3 class="text-card-title" style="color: #1B2C62;">採用特設サイト</h3>
+                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #0000ff !important; color: #ffffff !important; font-weight: 600;">Corp</span>
+                            </div>
+                            <!-- 一行概要 -->
+                            <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
+                                MV画像切替・無限ループスライド・ホバー拡大等を実装。演出を軽量化し扱いやすい構成。
+                            </p>
+                            
+                            <!-- フッター行 -->
+                            <div class="flex items-center justify-between">
+                                <!-- Techタグ -->
+                                <div class="flex flex-wrap gap-1.5">
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ffff00 !important; color: #000000 !important; font-weight: 500;">HTML</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff00ff !important; color: #ffffff !important; font-weight: 500;">Sass</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #00ffff !important; color: #000000 !important; font-weight: 500;">JS</span>
+                                    <span class="text-caption px-2 py-1 rounded-full" style="background-color: #ff8000 !important; color: #ffffff !important; font-weight: 500;">WP</span>
+                                </div>
+                                
+                                <!-- 詳しく見る -->
+                                <span class="text-caption" style="color: #ff0000 !important; font-weight: 500;">詳しく見る ›</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ④ Services Section - 中峰さんならではのサービス -->
+        <section id="services" class="py-20 md:py-32 relative overflow-hidden" style="background-color: #1B2C62;">
+            <canvas id="services-canvas" class="absolute inset-0 w-full h-full opacity-15" style="z-index: 1;"></canvas>
+            <div class="max-w-[1440px] mx-auto px-6 relative z-10">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-h1 mb-4 text-white">Services</h2>
+                    <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">提供サービス</p>
+                </div>
+                
+                <div class="max-w-[1120px] mx-auto grid md:grid-cols-3 items-stretch" style="gap: 24px;">
+                    <!-- Service Card 1: ホームページ・LPコーディング代行 -->
+                    <div class="reveal border transition-all duration-300 cursor-pointer group flex flex-col h-full" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; border-radius: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('coding')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('coding');}" aria-label="ホームページ／LPコーディング代行の詳細を見る">
+                        <div style="padding: 24px;" class="flex-1 flex flex-col">
+                            <div class="flex gap-4 flex-1">
+                                <!-- Icon -->
+                                <div class="flex-shrink-0 w-12">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(238, 242, 255, 0.1) 0%, rgba(238, 242, 255, 0.05) 100%); border-radius: 12px;">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background-color: rgba(238, 242, 255, 0.8); border-radius: 8px;">
+                                            <svg class="w-5 h-5 md:w-6 md:h-6" style="color: #1B2C62;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content -->
+                                <div class="flex-1 min-w-0 flex flex-col">
+                                    <!-- Title -->
+                                    <h3 class="text-card-title mb-2" style="color: #1B2C62;">
+                                        ホームページ／LP<br>コーディング代行
+                                    </h3>
+                                    
+                                    <!-- Summary -->
+                                    <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
+                                        支給デザインを現場基準で忠実再現。PC／スマホ最適化と軽微アニメーション対応
+                                    </p>
+                                    
+                                    <!-- Meta Chips -->
+                                    <div class="flex flex-wrap mb-6" style="gap: 8px 12px;">
+                                        <span class="text-meta px-3 py-1.5 rounded-full" style="color: #1B2C62; height: 28px; display: flex; align-items: center; background-color: #EEF2FF;">対応範囲｜静的／軽量JS・WP化可</span>
+                                        <span class="text-meta px-3 py-1.5 rounded-full" style="color: #1B2C62; height: 28px; display: flex; align-items: center; background-color: #EEF2FF;">小さな修正歓迎</span>
+                                    </div>
+                                    
+                                    <!-- CTA -->
+                                    <div class="flex items-center justify-end mt-auto">
+                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;">
+                                            詳しく見る
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 2: ホームページの運用保守・修正 -->
+                    <div class="reveal border transition-all duration-300 cursor-pointer group flex flex-col h-full" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; border-radius: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease; transition-delay: 200ms;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('maintenance')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('maintenance');}" aria-label="ホームページの運用保守・修正の詳細を見る">
+                        <div style="padding: 24px;" class="flex-1 flex flex-col">
+                            <div class="flex gap-4 flex-1">
+                                <!-- Icon -->
+                                <div class="flex-shrink-0 w-12">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(238, 242, 255, 0.1) 0%, rgba(238, 242, 255, 0.05) 100%); border-radius: 12px;">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background-color: rgba(238, 242, 255, 0.8); border-radius: 8px;">
+                                            <svg class="w-5 h-5 md:w-6 md:h-6" style="color: #1B2C62;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content -->
+                                <div class="flex-1 min-w-0 flex flex-col">
+                                    <!-- Title -->
+                                    <h3 class="text-card-title mb-2" style="color: #1B2C62;">
+                                        ホームページの<br>運用保守・修正
+                                    </h3>
+                                    
+                                    <!-- Summary -->
+                                    <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
+                                        公開後の軽微修正・月次更新・一次対応の継続サポート、安心の運用体制
+                                    </p>
+                                    
+                                    <!-- Meta Chips -->
+                                    <div class="flex flex-wrap mb-6" style="gap: 8px 12px;">
+                                        <span class="px-3 py-1.5 font-medium rounded-full" style="color: #1B2C62; font-size: 13px; line-height: 20px; height: 28px; display: flex; align-items: center; background-color: #EEF2FF;">対応範囲｜月次更新／一次対応</span>
+                                        <span class="px-3 py-1.5 font-medium rounded-full" style="color: #1B2C62; font-size: 13px; line-height: 20px; height: 28px; display: flex; align-items: center; background-color: #EEF2FF;">当日一次回答</span>
+                                    </div>
+                                    
+                                    <!-- CTA -->
+                                    <div class="flex items-center justify-end mt-auto">
+                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;">
+                                            詳しく見る
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service Card 3: ブログ更新代行 -->
+                    <div class="reveal border transition-all duration-300 cursor-pointer group flex flex-col h-full" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; border-radius: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease; transition-delay: 400ms;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('blog')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('blog');}" aria-label="ブログ更新代行の詳細を見る">
+                        <div style="padding: 24px;" class="flex-1 flex flex-col">
+                            <div class="flex gap-4 flex-1">
+                                <!-- Icon -->
+                                <div class="flex-shrink-0 w-12">
+                                    <div class="w-10 h-10 md:w-12 md:h-12 rounded-xl flex items-center justify-center" style="background: linear-gradient(135deg, rgba(238, 242, 255, 0.1) 0%, rgba(238, 242, 255, 0.05) 100%); border-radius: 12px;">
+                                        <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background-color: rgba(238, 242, 255, 0.8); border-radius: 8px;">
+                                            <svg class="w-5 h-5 md:w-6 md:h-6" style="color: #1B2C62;" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Content -->
+                                <div class="flex-1 min-w-0 flex flex-col">
+                                    <!-- Title -->
+                                    <h3 class="text-card-title mb-2" style="color: #1B2C62;">
+                                        ブログ<br>更新代行
+                                    </h3>
+                                    
+                                    <!-- Summary -->
+                                    <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
+                                        既存CMSに合わせた記事入稿と装飾、画像差し替えの代行、発信の継続支援
+                                    </p>
+                                    
+                                    <!-- Meta Chips -->
+                                    <div class="flex flex-wrap mb-6" style="gap: 8px 12px;">
+                                        <span class="px-3 py-1.5 font-medium rounded-full" style="color: #1B2C62; font-size: 13px; line-height: 20px; height: 28px; display: flex; align-items: center; background-color: #EEF2FF;">対応範囲｜入稿／装飾／画像差し替え</span>
+                                        <span class="px-3 py-1.5 font-medium rounded-full" style="color: #1B2C62; font-size: 13px; line-height: 20px; height: 28px; display: flex; align-items: center; background-color: #EEF2FF;">まずは相談のみOK</span>
+                                    </div>
+                                    
+                                    <!-- CTA -->
+                                    <div class="flex items-center justify-end mt-auto">
+                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;">
+                                            詳しく見る
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ⑤ Contact Section -->
+        <section id="contact" class="py-20 md:py-32 bg-white">
+            <div class="max-w-[1440px] mx-auto px-6">
+                <div class="text-center mb-16 reveal">
+                    <h2 class="text-h1 mb-4" style="color: #1B2C62;">Contact</h2>
+                    <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">お気軽にご相談ください</p>
+                </div>
+                
+                <div class="max-w-2xl mx-auto text-center mb-8 reveal">
+                    <div class="bg-blue-50 p-6 rounded-lg mb-8">
+                        <h3 class="text-body-large mb-2" style="color: #1B2C62; font-weight: 600;">対応時間</h3>
+                        <p class="text-body" style="color: #1B2C62;">平日 9:30〜18:00（休日対応可）</p>
+                    </div>
+                </div>
+
+                <div class="max-w-2xl mx-auto reveal">
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-body-small text-slate-700" style="font-weight: 500;">お名前</label>
+                            <input type="text" name="name" id="name" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        </div>
+                        <div>
+                            <label for="email" class="block text-body-small text-slate-700" style="font-weight: 500;">メールアドレス</label>
+                            <input type="email" name="email" id="email" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                        </div>
+                        <div>
+                            <label for="message" class="block text-body-small text-slate-700" style="font-weight: 500;">お問い合わせ内容</label>
+                            <textarea name="message" id="message" rows="4" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+                        </div>
+                        <div class="text-center pt-4">
+                            <button type="submit" id="submit-btn" class="inline-block text-body-small text-white font-medium py-3 px-10 rounded-full hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-blue-300" style="background: linear-gradient(to right, #1B2C62, #2D4BA8);">
+                                送信する
+                            </button>
+                        </div>
+                        <div id="form-message" class="text-center hidden"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+ 
+    <!-- ポートフォリオ詳細モーダル -->
+    <div id="portfolio-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden opacity-0 transition-all duration-300" aria-modal="true" role="dialog" aria-labelledby="modal-title">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-[800px] w-full max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-all duration-300" id="modal-content">
+                <!-- モーダルコンテンツがここに動的に挿入されます -->
+            </div>
+        </div>
+    </div>
+
+    <!-- サービス詳細モーダル -->
+    <div id="service-modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 hidden opacity-0 transition-all duration-300" aria-modal="true" role="dialog" aria-labelledby="service-modal-title">
+        <div class="min-h-screen flex items-center justify-center p-4">
+            <div class="bg-white rounded-2xl max-w-[800px] w-full max-h-[90vh] overflow-y-auto shadow-2xl transform scale-95 transition-all duration-300" id="service-modal-content">
+                <!-- サービス詳細モーダルコンテンツがここに動的に挿入されます -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ⑥ Footer -->
+    <footer class="py-8 bg-slate-800">
+        <div class="max-w-[1440px] mx-auto px-6 text-center text-slate-300">
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="https://x.com/example" target="_blank" class="hover:text-blue-400 transition-colors duration-300" title="X（Twitter）">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <a href="https://github.com/example" target="_blank" class="hover:text-blue-400 transition-colors duration-300" title="GitHub">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+                </a>
+            </div>
+            <p class="text-body-small">&copy; 2025 habataki create. All Rights Reserved.</p>
+        </div>
+    </footer>
+    
+    <!-- ポートフォリオ詳細モーダル -->
+    <div id="portfolio-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-lg max-w-3xl w-full max-h-full overflow-y-auto relative">
+            <button id="modal-close" class="absolute top-4 right-4 text-slate-500 hover:text-blue-600">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="modal-body" class="p-8 md:p-12">
+                <!-- コンテンツはJSで動的に挿入されます -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes fade-in-up {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fade-in-up 0.6s ease-out forwards;
+        }
+        
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.4);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(59, 130, 246, 0);
+            }
+        }
+        
+        .pulse-glow {
+            animation: pulse-glow 2s infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .glass-morphism {
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            background-color: rgba(255, 255, 255, 0.75);
+            border: 1px solid rgba(209, 213, 219, 0.3);
+        }
+        
+        .tech-badge {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .tech-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+        
+        .tech-badge:hover::before {
+            left: 100%;
+        }
+        
+        .feature-item {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-item::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s;
+        }
+        
+        .feature-item:hover::after {
+            transform: translateX(100%);
+        }
+    </style>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+
+        // --- About Section Animation: 正確性と継続力を表現 ---
+        const aboutCanvas = document.getElementById('about-canvas');
+        if (aboutCanvas) {
+            const aboutScene = new THREE.Scene();
+            const aboutCamera = new THREE.PerspectiveCamera(75, aboutCanvas.offsetWidth / aboutCanvas.offsetHeight, 0.1, 1000);
+            const aboutRenderer = new THREE.WebGLRenderer({ canvas: aboutCanvas, alpha: true, antialias: true });
+            aboutRenderer.setSize(aboutCanvas.offsetWidth, aboutCanvas.offsetHeight);
+            aboutRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+
+            // グリッド状の点群を作成（正確性を表現）
+            const aboutGeometry = new THREE.BufferGeometry();
+            const aboutPositions = [];
+            const aboutColors = [];
+            
+            const gridSize = 20;
+            const spacing = 2;
+            
+            for (let x = -gridSize; x <= gridSize; x += spacing) {
+                for (let y = -gridSize; y <= gridSize; y += spacing) {
+                    for (let z = -gridSize; z <= gridSize; z += spacing) {
+                        aboutPositions.push(x, y, z);
+                        // 中峰さんのブランドカラー
+                        aboutColors.push(0.18, 0.29, 0.66); // #2D4BA8
+                    }
+                }
+            }
+            
+            aboutGeometry.setAttribute('position', new THREE.Float32BufferAttribute(aboutPositions, 3));
+            aboutGeometry.setAttribute('color', new THREE.Float32BufferAttribute(aboutColors, 3));
+            
+            const aboutMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const aboutPoints = new THREE.Points(aboutGeometry, aboutMaterial);
+            aboutScene.add(aboutPoints);
+            aboutCamera.position.z = 30;
+
+            // 正確で継続的なアニメーション
+            function animateAbout() {
+                requestAnimationFrame(animateAbout);
+                
+                // 規則正しい脈動（継続力を表現）
+                const pulse = Math.sin(Date.now() * 0.002) * 0.3 + 0.7;
+                aboutMaterial.opacity = pulse * 0.6;
+                
+                // 正確な回転（1px単位の正確性を表現）
+                aboutPoints.rotation.y += 0.005;
+                aboutPoints.rotation.x += 0.002;
+                
+                aboutRenderer.render(aboutScene, aboutCamera);
+            }
+            animateAbout();
+        }
+
+        // --- Services Section Animation: 正確性と継続力を表現（統一アニメーション） ---
+        const servicesCanvas = document.getElementById('services-canvas');
+        if (servicesCanvas) {
+            const servicesScene = new THREE.Scene();
+            const servicesCamera = new THREE.PerspectiveCamera(75, servicesCanvas.offsetWidth / servicesCanvas.offsetHeight, 0.1, 1000);
+            const servicesRenderer = new THREE.WebGLRenderer({ canvas: servicesCanvas, alpha: true, antialias: true });
+            servicesRenderer.setSize(servicesCanvas.offsetWidth, servicesCanvas.offsetHeight);
+            servicesRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+
+            // グリッド状の点群を作成（正確性を表現）
+            const servicesGeometry = new THREE.BufferGeometry();
+            const servicesPositions = [];
+            const servicesColors = [];
+            
+            const gridSize = 20;
+            const spacing = 2;
+            
+            for (let x = -gridSize; x <= gridSize; x += spacing) {
+                for (let y = -gridSize; y <= gridSize; y += spacing) {
+                    for (let z = -gridSize; z <= gridSize; z += spacing) {
+                        servicesPositions.push(x, y, z);
+                        // 中峰さんのブランドカラー
+                        servicesColors.push(0.18, 0.29, 0.66); // #2D4BA8
+                    }
+                }
+            }
+            
+            servicesGeometry.setAttribute('position', new THREE.Float32BufferAttribute(servicesPositions, 3));
+            servicesGeometry.setAttribute('color', new THREE.Float32BufferAttribute(servicesColors, 3));
+            
+            const servicesMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const servicesPoints = new THREE.Points(servicesGeometry, servicesMaterial);
+            servicesScene.add(servicesPoints);
+            servicesCamera.position.z = 30;
+
+            // 正確で継続的なアニメーション
+            function animateServices() {
+                requestAnimationFrame(animateServices);
+                
+                // 規則正しい脈動（継続力を表現）
+                const pulse = Math.sin(Date.now() * 0.002) * 0.3 + 0.7;
+                servicesMaterial.opacity = pulse * 0.6;
+                
+                // 正確な回転（1px単位の正確性を表現）
+                servicesPoints.rotation.y += 0.005;
+                servicesPoints.rotation.x += 0.002;
+                
+                servicesRenderer.render(servicesScene, servicesCamera);
+            }
+            animateServices();
+        }
+
+        // --- Home Section Animation: 正確性と継続力を表現（統一アニメーション） ---
+        const homeCanvas = document.getElementById('home-canvas');
+        if (homeCanvas) {
+            const homeScene = new THREE.Scene();
+            const homeCamera = new THREE.PerspectiveCamera(75, homeCanvas.offsetWidth / homeCanvas.offsetHeight, 0.1, 1000);
+            const homeRenderer = new THREE.WebGLRenderer({ canvas: homeCanvas, alpha: true, antialias: true });
+            homeRenderer.setSize(homeCanvas.offsetWidth, homeCanvas.offsetHeight);
+            homeRenderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+
+            // グリッド状の点群を作成（正確性を表現）
+            const homeGeometry = new THREE.BufferGeometry();
+            const homePositions = [];
+            const homeColors = [];
+            
+            const gridSize = 20;
+            const spacing = 2;
+            
+            for (let x = -gridSize; x <= gridSize; x += spacing) {
+                for (let y = -gridSize; y <= gridSize; y += spacing) {
+                    for (let z = -gridSize; z <= gridSize; z += spacing) {
+                        homePositions.push(x, y, z);
+                        // 中峰さんのブランドカラー
+                        homeColors.push(0.18, 0.29, 0.66); // #2D4BA8
+                    }
+                }
+            }
+            
+            homeGeometry.setAttribute('position', new THREE.Float32BufferAttribute(homePositions, 3));
+            homeGeometry.setAttribute('color', new THREE.Float32BufferAttribute(homeColors, 3));
+            
+            const homeMaterial = new THREE.PointsMaterial({
+                size: 0.1,
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.6
+            });
+            
+            const homePoints = new THREE.Points(homeGeometry, homeMaterial);
+            homeScene.add(homePoints);
+            homeCamera.position.z = 30;
+
+            // 正確で継続的なアニメーション
+            function animateHome() {
+                requestAnimationFrame(animateHome);
+                
+                // 規則正しい脈動（継続力を表現）
+                const pulse = Math.sin(Date.now() * 0.002) * 0.3 + 0.7;
+                homeMaterial.opacity = pulse * 0.6;
+                
+                // 正確な回転（1px単位の正確性を表現）
+                homePoints.rotation.y += 0.005;
+                homePoints.rotation.x += 0.002;
+                
+                homeRenderer.render(homeScene, homeCamera);
+            }
+            animateHome();
+        }
+
+
+        // リサイズ対応
+        window.addEventListener('resize', () => {
+            
+            // FVセクション
+            if (homeCanvas && homeRenderer && homeCamera) {
+                const rect = homeCanvas.getBoundingClientRect();
+                homeRenderer.setSize(rect.width, rect.height);
+                homeCamera.aspect = rect.width / rect.height;
+                homeCamera.updateProjectionMatrix();
+            }
+            
+            // Aboutセクション
+            if (aboutCanvas && aboutRenderer && aboutCamera) {
+                const rect = aboutCanvas.getBoundingClientRect();
+                aboutRenderer.setSize(rect.width, rect.height);
+                aboutCamera.aspect = rect.width / rect.height;
+                aboutCamera.updateProjectionMatrix();
+            }
+            
+            // Servicesセクション
+            if (servicesCanvas && servicesRenderer && servicesCamera) {
+                const rect = servicesCanvas.getBoundingClientRect();
+                servicesRenderer.setSize(rect.width, rect.height);
+                servicesCamera.aspect = rect.width / rect.height;
+                servicesCamera.updateProjectionMatrix();
+            }
+        });
+
+        // --- スクロール連動アニメーション ---
+        const revealElements = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        revealElements.forEach(el => observer.observe(el));
+        
+        // --- モバイルメニューのトグル ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        if (mobileMenuButton && mobileMenu) {
+            mobileMenuButton.addEventListener('click', () => {
+                const isHidden = mobileMenu.classList.contains('hidden');
+                mobileMenu.classList.toggle('hidden');
+                
+                // ARIA属性の更新
+                mobileMenuButton.setAttribute('aria-expanded', !isHidden);
+                mobileMenuButton.setAttribute('aria-label', !isHidden ? 'メニューを開く' : 'メニューを閉じる');
+            });
+
+            // メニュー外クリックで閉じる
+            document.addEventListener('click', (e) => {
+                if (!mobileMenuButton.contains(e.target) && !mobileMenu.contains(e.target)) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenuButton.setAttribute('aria-label', 'メニューを開く');
+                }
+            });
+
+            // ESCキーで閉じる
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuButton.setAttribute('aria-expanded', 'false');
+                    mobileMenuButton.setAttribute('aria-label', 'メニューを開く');
+                    mobileMenuButton.focus();
+                }
+            });
+        }
+        
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+
+        // --- ナビゲーションのアクティブ状態更新 ---
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('nav a');
+
+        const updateActiveLink = () => {
+            let currentSectionId = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 100) {
+                    currentSectionId = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${currentSectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', updateActiveLink);
+        updateActiveLink();
+
+        // --- コンタクトフォームの送信機能 ---
+        const contactForm = document.getElementById('contact-form');
+        const submitBtn = document.getElementById('submit-btn');
+        const formMessage = document.getElementById('form-message');
+
+        if (contactForm) {
+            // リアルタイムバリデーション
+            const inputs = contactForm.querySelectorAll('input, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', validateField);
+                input.addEventListener('input', clearError);
+            });
+
+            function validateField(e) {
+                const field = e.target;
+                const value = field.value.trim();
+                
+                // エラーメッセージをクリア
+                clearFieldError(field);
+                
+                if (field.hasAttribute('required') && !value) {
+                    showFieldError(field, 'この項目は必須です');
+                    return false;
+                }
+                
+                if (field.type === 'email' && value) {
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!emailRegex.test(value)) {
+                        showFieldError(field, '有効なメールアドレスを入力してください');
+                        return false;
+                    }
+                }
+                
+                return true;
+            }
+
+            function showFieldError(field, message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'field-error text-body-small text-red-600 mt-1';
+                errorDiv.textContent = message;
+                field.parentNode.appendChild(errorDiv);
+                field.classList.add('border-red-500');
+            }
+
+            function clearFieldError(field) {
+                const errorDiv = field.parentNode.querySelector('.field-error');
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+                field.classList.remove('border-red-500');
+            }
+
+            function clearError(e) {
+                clearFieldError(e.target);
+            }
+
+            contactForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                // 全フィールドのバリデーション
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!validateField({ target: input })) {
+                        isValid = false;
+                    }
+                });
+                
+                if (!isValid) {
+                    formMessage.className = 'text-center text-body text-red-600';
+                    formMessage.style.fontWeight = '500';
+                    formMessage.textContent = '入力内容を確認してください';
+                    formMessage.classList.remove('hidden');
+                    return;
+                }
+                
+                submitBtn.disabled = true;
+                submitBtn.textContent = '送信中...';
+                
+                // 簡易的なサンクス表示（実際のPHP処理は別途実装が必要）
+                setTimeout(() => {
+                    formMessage.className = 'text-center text-body text-blue-600';
+                    formMessage.style.fontWeight = '500';
+                    formMessage.textContent = 'お問い合わせありがとうございます。確認後、ご連絡いたします。';
+                    formMessage.classList.remove('hidden');
+                    
+                    contactForm.reset();
+                    
+                    setTimeout(() => {
+                        formMessage.classList.add('hidden');
+                        submitBtn.disabled = false;
+                        submitBtn.textContent = '送信する';
+                    }, 3000);
+                }, 1000);
+            });
+        }
+
+        // --- フォーカス管理の改善 ---
+        function trapFocus(element) {
+            const focusableElements = element.querySelectorAll(
+                'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+            );
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            element.addEventListener('keydown', (e) => {
+                if (e.key === 'Tab') {
+                    if (e.shiftKey) {
+                        if (document.activeElement === firstElement) {
+                            lastElement.focus();
+                            e.preventDefault();
+                        }
+                    } else {
+                        if (document.activeElement === lastElement) {
+                            firstElement.focus();
+                            e.preventDefault();
+                        }
+                    }
+                }
+            });
+        }
+
+        // --- ポートフォリオ詳細モーダル機能 ---
+        
+        // ポートフォリオデータ（最新情報）
+        const portfolioData = {
+            caresend: {
+                title: 'サービスLP',
+                category: 'LP',
+                period: '1週間',
+                date: '2025/07/15',
+                url: 'https://habataki24.com/caresend',
+                role: 'コーディング',
+                pages: 'LP（1ページ）',
+                description: '販売カンプをベースに検証用LPを実装。ナビゲーション追従、メニュー開閉、フォーム埋め込みなどLPの基本動作を軽量で実装。',
+                features: [
+                    '固定ヘッダー追従',
+                    'ハンバーガーメニュー',
+                    'Googleフォーム埋め込み',
+                    '無限ループスクロール',
+                    'アコーディオン'
+                ],
+                technologies: ['HTML', 'CSS(Sass)', 'JavaScript', 'Figma'],
+                basicAuth: true,
+                authId: 'habataki',
+                authPassword: '2024',
+                commitments: [
+                    {
+                        title: '軽量実装',
+                        description: '必要最小限のJSで動作を実現し、高速表示を実現。'
+                    },
+                    {
+                        title: 'ユーザビリティ重視',
+                        description: 'フォーム操作やスクロール体験を最適化し、離脱率を削減。'
+                    },
+                    {
+                        title: '保守性確保',
+                        description: 'シンプルな構造で今後の修正・拡張に対応可能な設計。'
+                    }
+                ]
+            },
+            koumuten: {
+                title: '工務店サイト',
+                category: 'Corporate site',
+                period: '3週間',
+                date: '2025/07/15',
+                url: 'https://habataki24.com/koumuten',
+                role: 'コーディング',
+                pages: '下層4ページ',
+                description: 'Figmaカンプからコーディング。初回ローディング・フェードイン・モーダル・無限スライド・スムーススクロール等を実装。スマホレスポンシブは実機確認で自然な体験に調整。',
+                features: [
+                    '初回ローディング演出',
+                    'サイドバーのホバー開閉',
+                    'スクロール連動フェード',
+                    'モーダルウィンドウ',
+                    '無限自動スライド',
+                    'アコーディオン',
+                    'スムーススクロール'
+                ],
+                technologies: ['HTML', 'CSS(Sass)', 'JavaScript', 'Figma'],
+                basicAuth: true,
+                authId: 'habataki',
+                authPassword: '2024',
+                commitments: [
+                    {
+                        title: 'ピクセルパーフェクト再現',
+                        description: '余白・フォント・ブレイクポイントまで1px単位で調整し完全再現。'
+                    },
+                    {
+                        title: 'パフォーマンス最適化',
+                        description: '最小限のJSと遅延読込で高速表示と体験を両立。'
+                    },
+                    {
+                        title: '保守性・拡張性',
+                        description: 'コンポーネント化＋BEMで長期運用に耐える構成。'
+                    }
+                ]
+            },
+            saiyou: {
+                title: '採用特設サイト',
+                category: 'Corporate site',
+                period: '1ヶ月',
+                date: '2025/07/15',
+                url: 'https://habataki24.com/saiyou',
+                role: 'コーディング, WordPress',
+                pages: '下層11ページ',
+                description: 'Figmaカンプから下層11ページで実装。MV周り・見出し群にアニメーション追加、WordPressでカスタム投稿・CF7構築。レスポンシブ対応で現場基準の再現性を実現。',
+                features: [
+                    'MV画像切り替え',
+                    'ヘッダー切り替え',
+                    '無限ループスライド',
+                    'フェード出現演出',
+                    '画像ホバー拡大',
+                    'Contact Form 7'
+                ],
+                technologies: ['HTML', 'CSS(Sass)', 'JavaScript', 'WordPress', 'Figma'],
+                basicAuth: true,
+                authId: 'habataki',
+                authPassword: '2024',
+                commitments: [
+                    {
+                        title: 'WordPress最適化',
+                        description: 'カスタム投稿・CF7を活用し、運用しやすいCMS構築を実現。'
+                    },
+                    {
+                        title: '採用体験設計',
+                        description: 'MV切替・フェード演出で求職者の興味を引く体験を構築。'
+                    },
+                    {
+                        title: '拡張性確保',
+                        description: 'コンテンツ追加・修正が容易なWordPressテーマ設計。'
+                    }
+                ]
+            }
+        };
+
+        // モーダルを開く関数
+        window.openPortfolioDetail = function(projectId) {
+            const project = portfolioData[projectId];
+            if (!project) return;
+
+            const modal = document.getElementById('portfolio-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            // フォーカス管理
+            const previousActiveElement = document.activeElement;
+            
+            // バランスの取れたプロフェッショナルモーダル
+            modalContent.innerHTML = `
+                <div class="relative max-w-[800px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden w-full border border-slate-100">
+                    <!-- ① エレガントヘッダー -->
+                    <div class="relative bg-gradient-to-br from-slate-50 to-blue-50/20 px-16 py-8">
+                        <!-- タイトルライン -->
+                        <div class="flex items-start justify-between mb-6">
+                            <div class="flex-1">
+                                <div class="flex items-baseline gap-4 mb-4">
+                                    <h1 class="text-h2 text-slate-900 tracking-tight">${project.title}</h1>
+                                    <span class="bg-gradient-to-r from-slate-800 to-slate-900 text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">${project.category}</span>
+                                    ${project.basicAuth ? `
+                                    <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">認証必須</span>
+                                    ` : ''}
+                                </div>
+                                
+                                <!-- プロジェクト概要 -->
+                                <p class="text-body-large text-slate-700 max-w-3xl">${project.description}</p>
+                            </div>
+                            
+                            <button onclick="closePortfolioDetail()" class="ml-6 p-3 text-slate-400 hover:text-slate-600 hover:bg-white/60 rounded-xl transition-all duration-200">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                                </svg>
+                            </button>
+                        </div>
+                        
+                        <!-- プロジェクトメトリクス -->
+                        <div class="pt-6">
+                            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                                <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">制作期間</div>
+                                <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.period}</div>
+                            </div>
+                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                                <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">ページ構成</div>
+                                <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.pages}</div>
+                            </div>
+                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                                <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">担当範囲</div>
+                                <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.role}</div>
+                            </div>
+                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                                <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">使用技術</div>
+                                <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.technologies.slice(0, 4).join(', ')}</div>
+                                
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ② 1カラム統合レイアウト -->
+                    <div class="px-16 py-10">
+                        <div class="space-y-10">
+
+                            <!-- 実装機能 -->
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-1 h-8 rounded-full" style="background: linear-gradient(to bottom, #1B2C62, #2D4BA8);"></div>
+                                    <h2 class="text-card-title" style="color: #1B2C62;">実装機能</h2>
+                                </div>
+                                <div class="grid md:grid-cols-2 gap-3">
+                                    ${project.features.slice(0, 6).map(feature => `
+                                        <div class="flex items-center gap-3 py-2">
+                                            <div class="w-4 h-4 rounded-full flex items-center justify-center flex-shrink-0" style="background-color: rgba(27, 44, 98, 0.15);">
+                                                <svg class="w-2.5 h-2.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="color: #1B2C62;">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                            </div>
+                                            <span class="text-body" style="color: #1B2C62; font-weight: 500;">${feature}</span>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- 制作のこだわり -->
+                            <div class="space-y-6">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-1 h-8 rounded-full" style="background: linear-gradient(to bottom, #1B2C62, #4A7BFF);"></div>
+                                    <h2 class="text-card-title" style="color: #1B2C62;">制作のこだわり</h2>
+                                </div>
+                                <div class="space-y-4">
+                                    ${project.commitments ? project.commitments.map((commitment, index) => `
+                                        <div class="flex items-start gap-4 p-4 rounded-xl" style="background-color: rgba(27, 44, 98, 0.05);">
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #1B2C62, ${index === 0 ? '#2D4BA8' : index === 1 ? '#4A7BFF' : '#6B9EFF'});">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    ${index === 0 ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>' : 
+                                                      index === 1 ? '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>' :
+                                                      '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>'}
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-body mb-2" style="color: #1B2C62; font-weight: 600;">${commitment.title}</h3>
+                                                <p style="color: #1B2C62; line-height: 1.7; font-size: 14px; font-weight: 400; opacity: 0.8;">${commitment.description}</p>
+                                            </div>
+                                        </div>
+                                    `).join('') : `
+                                        <div class="flex items-start gap-4 p-4 rounded-xl" style="background-color: rgba(27, 44, 98, 0.05);">
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #1B2C62, #2D4BA8);">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-body mb-2" style="color: #1B2C62; font-weight: 600;">ピクセルパーフェクト再現</h3>
+                                                <p style="color: #1B2C62; line-height: 1.7; font-size: 14px; font-weight: 400; opacity: 0.8;">余白・フォント・ブレイクポイントまで1px単位で調整し完全再現。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-start gap-4 p-4 rounded-xl" style="background-color: rgba(27, 44, 98, 0.05);">
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #1B2C62, #4A7BFF);">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-body mb-2" style="color: #1B2C62; font-weight: 600;">パフォーマンス最適化</h3>
+                                                <p style="color: #1B2C62; line-height: 1.7; font-size: 14px; font-weight: 400; opacity: 0.8;">最小限のJSと遅延読込で高速表示と体験を両立。</p>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="flex items-start gap-4 p-4 rounded-xl" style="background-color: rgba(27, 44, 98, 0.05);">
+                                            <div class="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0" style="background: linear-gradient(135deg, #1B2C62, #6B9EFF);">
+                                                <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path>
+                                                </svg>
+                                            </div>
+                                            <div>
+                                                <h3 class="text-body mb-2" style="color: #1B2C62; font-weight: 600;">保守性・拡張性</h3>
+                                                <p style="color: #1B2C62; line-height: 1.7; font-size: 14px; font-weight: 400; opacity: 0.8;">コンポーネント化＋BEMで長期運用に耐える構成。</p>
+                                            </div>
+                                        </div>
+                                    `}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    </div>
+
+                    <!-- ④ 認証情報統合フッター -->
+                    <div class="px-16 py-8 border-t" style="background: linear-gradient(to right, #1B2C62, #2D4BA8); border-color: rgba(27, 44, 98, 0.3);">
+                        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+                            <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                                <button onclick="closePortfolioDetail()" class="px-5 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium w-fit">
+                                    閉じる
+                                </button>
+                                
+                                ${project.basicAuth ? `
+                                <div class="flex items-center gap-3 text-sm text-white/80">
+                                    <svg class="w-4 h-4 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                                    </svg>
+                                    <span>認証：<span class="font-mono text-white">ID ${project.authId}</span> / <span class="font-mono text-white">PW ${project.authPassword}</span></span>
+                                    <button onclick="navigator.clipboard.writeText('ID: ${project.authId}\\nPW: ${project.authPassword}').then(() => { const toast = document.createElement('div'); toast.textContent = 'コピーしました'; toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50'; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2000); })" class="text-white/60 hover:text-white p-1 rounded hover:bg-white/10">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                ` : ''}
+                            </div>
+                            
+                            <div class="flex justify-end">
+                                <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="px-8 py-3 text-white font-semibold rounded-xl transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl w-fit hover:scale-105" style="background: linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0.1)); border: 1px solid rgba(255,255,255,0.3);" onmouseover="this.style.background='linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.2))'" onmouseout="this.style.background='linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0.1))'">
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
+                                    </svg>
+                                    サイトを確認する
+                                    <span class="sr-only">（新規タブ）</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // モーダル表示
+            modal.classList.remove('hidden');
+            
+            // フォーカス管理とアクセシビリティ
+            trapFocus(modal);
+            const firstFocusable = modal.querySelector('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+            if (firstFocusable) {
+                firstFocusable.focus();
+            }
+            
+            // ESCキーで閉じる
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    closePortfolioDetail();
+                    document.removeEventListener('keydown', handleEscape);
+                }
+            };
+            document.addEventListener('keydown', handleEscape);
+            
+            setTimeout(() => {
+                modal.classList.remove('opacity-0');
+                modalContent.classList.remove('scale-95');
+                modalContent.classList.add('scale-100');
+            }, 10);
+
+            // ESCキーで閉じる
+            document.addEventListener('keydown', handleEscKey);
+            
+            // 背景クリックで閉じる
+            modal.addEventListener('click', handleBackgroundClick);
+        };
+
+        // モーダルを閉じる関数
+        window.closePortfolioDetail = function() {
+            const modal = document.getElementById('portfolio-modal');
+            const modalContent = document.getElementById('modal-content');
+            
+            modal.classList.add('opacity-0');
+            modalContent.classList.remove('scale-100');
+            modalContent.classList.add('scale-95');
+            
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+
+            // イベントリスナー削除
+            document.removeEventListener('keydown', handleEscKey);
+            modal.removeEventListener('click', handleBackgroundClick);
+        };
+
+        // ESCキーハンドラー
+        function handleEscKey(e) {
+            if (e.key === 'Escape') {
+                closePortfolioDetail();
+            }
+        }
+
+        // 背景クリックハンドラー
+        function handleBackgroundClick(e) {
+            if (e.target === e.currentTarget) {
+                closePortfolioDetail();
+            }
+        }
+
+        // 認証情報をコピーする関数
+        window.copyAuthInfo = function(id, password) {
+            const authText = `ID: ${id}\nPassword: ${password}`;
+            
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(authText).then(() => {
+                    // コピー成功の視覚的フィードバック
+                    const button = event.target.closest('button');
+                    const originalHTML = button.innerHTML;
+                    button.innerHTML = `
+                        <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                        </svg>
+                    `;
+                    button.classList.add('bg-green-100', 'text-green-700');
+                    button.classList.remove('bg-slate-100', 'hover:bg-slate-200', 'text-slate-700');
+                    
+                    setTimeout(() => {
+                        button.innerHTML = originalHTML;
+                        button.classList.remove('bg-green-100', 'text-green-700');
+                        button.classList.add('bg-slate-100', 'hover:bg-slate-200', 'text-slate-700');
+                    }, 2000);
+                }).catch(() => {
+                    alert(`認証情報:\n${authText}`);
+                });
+            } else {
+                alert(`認証情報:\n${authText}`);
+            }
+        };
+
+
+    });
+    
+    // Aboutセクション踏襲 - 中峰さんブランドカラー適用
+    document.addEventListener('DOMContentLoaded', function() {
+        function applyBrandColors() {
+            const portfolioCards = document.querySelectorAll('.portfolio-card');
+            
+            portfolioCards.forEach((card) => {
+                const spans = card.querySelectorAll('span.text-xs');
+                
+                spans.forEach((span) => {
+                    // デザイン性重視で緩急をつけた配色
+                    if (span.textContent.includes('noindex')) {
+                        // ステータス：最重要 - 濃い塗りつぶし + 白文字
+                        span.style.setProperty('background', '#1B2C62', 'important');
+                        span.style.setProperty('color', '#FFFFFF', 'important');
+                        span.style.setProperty('border', 'none', 'important');
+                        span.style.setProperty('font-weight', '700', 'important');
+                    } else if (span.textContent.includes('LP')) {
+                        // LP：重要 - 中程度の塗りつぶし + 白文字
+                        span.style.setProperty('background', '#2D4BA8', 'important');
+                        span.style.setProperty('color', '#FFFFFF', 'important');
+                        span.style.setProperty('border', 'none', 'important');
+                        span.style.setProperty('font-weight', '600', 'important');
+                    } else if (span.textContent.includes('Corp')) {
+                        // Corporate：重要 - 中程度の塗りつぶし + 白文字
+                        span.style.setProperty('background', '#2D4BA8', 'important');
+                        span.style.setProperty('color', '#FFFFFF', 'important');
+                        span.style.setProperty('border', 'none', 'important');
+                        span.style.setProperty('font-weight', '600', 'important');
+                    } else if (span.textContent.includes('HTML')) {
+                        // HTML：Tech - 薄い塗りつぶし + ブランドカラー文字
+                        span.style.setProperty('background', '#1B2C6220', 'important');
+                        span.style.setProperty('color', '#1B2C62', 'important');
+                        span.style.setProperty('border', '1px solid #1B2C6240', 'important');
+                        span.style.setProperty('font-weight', '500', 'important');
+                    } else if (span.textContent.includes('Sass')) {
+                        // Sass：Tech - 薄い塗りつぶし + ブランドカラー文字
+                        span.style.setProperty('background', '#1B2C6220', 'important');
+                        span.style.setProperty('color', '#1B2C62', 'important');
+                        span.style.setProperty('border', '1px solid #1B2C6240', 'important');
+                        span.style.setProperty('font-weight', '500', 'important');
+                    } else if (span.textContent.includes('JS')) {
+                        // JS：Tech - 薄い塗りつぶし + ブランドカラー文字
+                        span.style.setProperty('background', '#1B2C6220', 'important');
+                        span.style.setProperty('color', '#1B2C62', 'important');
+                        span.style.setProperty('border', '1px solid #1B2C6240', 'important');
+                        span.style.setProperty('font-weight', '500', 'important');
+                    } else if (span.textContent.includes('WP')) {
+                        // WP：Tech - 薄い塗りつぶし + ブランドカラー文字
+                        span.style.setProperty('background', '#1B2C6220', 'important');
+                        span.style.setProperty('color', '#1B2C62', 'important');
+                        span.style.setProperty('border', '1px solid #1B2C6240', 'important');
+                        span.style.setProperty('font-weight', '500', 'important');
+                    } else if (span.textContent.includes('詳しく見る')) {
+                        // 詳しく見る：アクション - 透明背景 + アクセントカラー文字
+                        span.style.setProperty('background', 'transparent', 'important');
+                        span.style.setProperty('color', '#F3B93D', 'important');
+                        span.style.setProperty('font-weight', '600', 'important');
+                        span.style.setProperty('text-decoration', 'underline', 'important');
+                    }
+                });
+            });
+        }
+        
+        // 複数回適用（確実に適用されるように）
+        applyBrandColors();
+        setTimeout(applyBrandColors, 100);
+        setTimeout(applyBrandColors, 500);
+        setTimeout(applyBrandColors, 1000);
+    });
+
+    // サービス詳細モーダル機能
+    const serviceData = {
+        coding: {
+            // カード（共通）
+            title: 'ホームページ／LPコーディング代行',
+            summary: '支給デザインを現場基準で忠実再現',
+            meta: ['レスポンシブ対応', 'SEO基本実装'],
+            ctaPrimary: '詳しく見る',
+            
+            // モーダル（共通）
+            assuranceChips: [
+                'Figma／XD／Sketch 対応',
+                '主要ブラウザ・OS 検証',
+                '差分±2px 目安',
+                '対応時間 4:00–6:00／10:00–16:00',
+                '連絡 24h 受付'
+            ],
+            overview: '支給デザインを現場基準で忠実再現。PC／スマホ最適化、フォーム基本実装、軽微アニメーションまで対応。保守性を重視した構造設計で長期運用にも適合',
+            includes: [
+                'HTML／CSS／JS 実装',
+                'レスポンシブ対応',
+                '基本SEO／フォーム基本実装'
+            ],
+            excludes: [
+                'デザイン制作',
+                '撮影・素材作成',
+                'EC・予約・多言語'
+            ],
+            options: [
+                'WordPress 化',
+                '追加ページ',
+                'モーション強化',
+                '性能最適化'
+            ],
+            price: {
+                from: '30万円〜'
+            },
+            estimateBasis: [
+                'ページ数',
+                '動的機能の有無',
+                'WordPress 化の有無',
+                '素材の有無'
+            ],
+            cta: '見積もり・空き状況'
+        },
+        maintenance: {
+            // カード（共通）
+            title: 'ホームページの運用保守・修正',
+            summary: '公開後のサイトを継続支援',
+            meta: ['月次更新', 'バックアップ'],
+            ctaPrimary: '詳しく見る',
+            
+            // モーダル（共通）
+            assuranceChips: [
+                '作業ログ共有',
+                '主要ブラウザ・OS 検証',
+                '対応時間 4:00–6:00／10:00–16:00',
+                '連絡 24h 受付',
+                '月次レポート'
+            ],
+            overview: '公開後のサイトを継続支援。テキスト／画像差し替え、月次更新、WordPress プラグイン更新の監視、定期バックアップまで対応。軽微トラブルの一次対応で運用の手間を削減',
+            includes: [
+                '軽微修正',
+                '月次更新',
+                '一次障害対応',
+                'バックアップ'
+            ],
+            excludes: [
+                '大規模改修',
+                '新規機能開発',
+                '取材・ライティング'
+            ],
+            options: [
+                'パフォーマンス改善',
+                'WordPress メジャーアップデート代行',
+                '追加ページ'
+            ],
+            price: {
+                from: '10万円/年〜'
+            },
+            estimateBasis: [
+                '更新頻度',
+                '対象ページ数',
+                'WordPress 構成',
+                '権限・環境'
+            ],
+            cta: '見積もり・空き状況'
+        },
+        blog: {
+            // カード（共通）
+            title: 'ブログ更新代行',
+            summary: '既存CMSに合わせた記事入稿と装飾',
+            meta: ['入稿代行', 'プレビュー確認'],
+            ctaPrimary: '詳しく見る',
+            
+            // モーダル（共通）
+            assuranceChips: [
+                '下書きプレビュー共有',
+                '公開前チェックリスト',
+                '対応時間 4:00–6:00／10:00–16:00',
+                '連絡 24h 受付'
+            ],
+            overview: '既存CMSに合わせた記事入稿と装飾、画像差し替えを代行。下書きプレビューで確認しながら公開まで伴走。発信を止めないための平準化運用',
+            includes: [
+                '入稿',
+                '見出し整形',
+                'アイキャッチ差し替え',
+                '内部リンク整備'
+            ],
+            excludes: [
+                '取材',
+                '原稿執筆',
+                '専門校閲'
+            ],
+            options: [
+                '簡易リライト',
+                '画像選定',
+                '構成テンプレ作成'
+            ],
+            price: {
+                from: '1.5円/字〜'
+            },
+            estimateBasis: [
+                '記事本数',
+                '1本あたりの文字量',
+                '画像点数',
+                'SEO要件の有無'
+            ],
+            cta: '見積もり・空き状況'
+        }
+    };
+
+    // サービス詳細モーダルを開く関数
+    window.openServiceDetail = function(serviceId) {
+        const service = serviceData[serviceId];
+        if (!service) return;
+
+        const modal = document.getElementById('service-modal');
+        const modalContent = document.getElementById('service-modal-content');
+        
+        modalContent.innerHTML = `
+            <div class="w-full max-w-[720px] mx-auto bg-white relative flex flex-col h-full" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+                <!-- ヘッダー -->
+                <div class="flex items-center justify-between px-6 py-6">
+                    <div>
+                        <h1 id="modal-title" class="text-h2 text-slate-900 tracking-tight">${service.title}</h1>
+                        <p class="text-body-small" style="color: #1B2C62; font-weight: 500;">価格目安：${service.price.from}</p>
+                    </div>
+                    <button onclick="closeServiceDetail()" class="text-slate-400 hover:text-slate-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;" aria-label="モーダルを閉じる">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- メインコンテンツ -->
+                <div class="flex-1 overflow-y-auto">
+                    <!-- 概要 -->
+                    <div class="px-6">
+                        <h2 class="text-card-title mb-4" style="color: #1B2C62;">サービス概要</h2>
+                        <p class="text-body mb-5" style="color: #374151;">${service.overview}</p>
+                        <div class="w-full h-px mb-5" style="background-color: #E6ECF5;"></div>
+                    </div>
+
+
+                    <!-- 品質基準・体制 -->
+                    <div class="px-6">
+                        <h2 class="text-card-title mb-4" style="color: #1B2C62;">品質基準・体制</h2>
+                        <div class="flex flex-wrap mb-5" style="gap: 8px 12px;">
+                            ${service.assuranceChips.map(chip => `
+                                <span class="px-3 py-1.5 text-meta rounded-full" style="background-color: #EEF2FF; color: #1B2C62; height: 28px; display: flex; align-items: center;">${chip}</span>
+                            `).join('')}
+                        </div>
+                        <div class="w-full h-px mb-5" style="background-color: #E6ECF5;"></div>
+                    </div>
+
+                    <!-- 作業範囲 -->
+                    <div class="px-6">
+                        <h2 class="text-card-title mb-4" style="color: #1B2C62;">作業範囲</h2>
+                        <div class="grid md:grid-cols-2 gap-6 mb-5">
+                            <!-- 含むこと -->
+                            <div>
+                                <div class="text-section-subheading mb-4" style="color: #059669;">含むこと</div>
+                                <div class="space-y-2">
+                                    ${service.includes.map(item => `
+                                        <div class="text-body" style="color: #374151;">${item}</div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                            
+                            <!-- 対象外（別途相談） -->
+                            <div>
+                                <div class="text-section-subheading mb-4" style="color: #1B2C62;">対象外（別途相談）</div>
+                                <div class="space-y-2">
+                                    ${service.excludes.map(item => `
+                                        <div class="text-body text-slate-600">${item}</div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full h-px mb-5" style="background-color: #E6ECF5;"></div>
+                    </div>
+
+                    <!-- 追加オプション -->
+                    <div class="px-6">
+                        <h2 class="text-card-title mb-4" style="color: #1B2C62;">追加オプション</h2>
+                        <div class="flex flex-wrap mb-5" style="gap: 8px 12px;">
+                            ${service.options.map(option => `
+                                <span class="px-3 py-1.5 text-meta rounded-full" style="background-color: #EEF2FF; color: #374151; height: 28px; display: flex; align-items: center;">${option}</span>
+                            `).join('')}
+                        </div>
+                        <div class="w-full h-px mb-5" style="background-color: #E6ECF5;"></div>
+                    </div>
+
+                    <!-- 価格の決め方 -->
+                    <div class="px-6 pb-24">
+                        <h2 class="text-card-title mb-4" style="color: #1B2C62;">価格の決め方</h2>
+                        <div class="flex flex-wrap" style="gap: 8px 12px;">
+                            ${service.estimateBasis.map(basis => `
+                                <span class="px-3 py-1.5 text-meta rounded-full" style="background-color: #EEF2FF; color: #374151; height: 28px; display: flex; align-items: center;">${basis}</span>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- フッター（sticky） -->
+                <div class="sticky bottom-0 border-t px-6 py-4" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(6px); border-color: #E5E7EB;">
+                    <div class="flex items-center justify-between">
+                        <a href="#portfolio" class="text-body-small text-slate-600 hover:text-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 hidden md:block" style="focus:ring-color: #1B2C62;">制作の流れ＆料金</a>
+                        <a href="#contact" onclick="closeServiceDetail()" class="px-6 py-3 text-body-small text-white font-medium transition-all duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #1B2C62; height: 44px; border-radius: 10px; display: flex; align-items: center; focus:ring-color: #1B2C62;">
+                            見積もり・空き状況
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // モーダル表示
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }, 10);
+
+        // フォーカストラップとアクセシビリティ
+        const focusableElements = modalContent.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+        const firstFocusableElement = focusableElements[0];
+        const lastFocusableElement = focusableElements[focusableElements.length - 1];
+
+        // 初期フォーカス設定
+        setTimeout(() => firstFocusableElement?.focus(), 100);
+
+        // フォーカストラップ
+        const handleTabKey = (e) => {
+            if (e.key === 'Tab') {
+                if (e.shiftKey) {
+                    if (document.activeElement === firstFocusableElement) {
+                        lastFocusableElement?.focus();
+                        e.preventDefault();
+                    }
+                } else {
+                    if (document.activeElement === lastFocusableElement) {
+                        firstFocusableElement?.focus();
+                        e.preventDefault();
+                    }
+                }
+            }
+        };
+
+        // ESCキーで閉じる
+        document.addEventListener('keydown', handleServiceEscKey);
+        document.addEventListener('keydown', handleTabKey);
+        
+        // 背景クリックで閉じる
+        modal.addEventListener('click', handleServiceBackgroundClick);
+    };
+
+    // サービス詳細モーダルを閉じる関数
+    window.closeServiceDetail = function() {
+        const modal = document.getElementById('service-modal');
+        const modalContent = document.getElementById('service-modal-content');
+        
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+
+        // イベントリスナー削除
+        document.removeEventListener('keydown', handleServiceEscKey);
+        document.removeEventListener('keydown', handleTabKey);
+        modal.removeEventListener('click', handleServiceBackgroundClick);
+    };
+
+    // ESCキーハンドラー
+    function handleServiceEscKey(event) {
+        if (event.key === 'Escape') {
+            closeServiceDetail();
+        }
+    }
+
+    // 背景クリックハンドラー
+    function handleServiceBackgroundClick(event) {
+        if (event.target === event.currentTarget) {
+            closeServiceDetail();
+        }
+    }
+    </script>
+    
+</body>
+</html>
