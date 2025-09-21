@@ -352,6 +352,96 @@
         .elegant-button:hover::before {
             left: 100%;
         }
+        
+        /* コンポーネント共通クラス（Buttons / Chips / Cards / Links） */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            padding: 0.5rem 1rem; /* 8px 16px */
+            font-size: var(--font-body-small);
+            font-weight: 500;
+            line-height: 1.6;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            text-decoration: none;
+        }
+        .btn:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%);
+            color: #FFFFFF;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #3B82F6 0%, #1B2C62 100%);
+        }
+        .btn-secondary {
+            background: transparent;
+            color: #1B2C62;
+            border: 1px solid #1B2C62;
+        }
+        .btn-secondary:hover {
+            background-color: #EEF2FF;
+        }
+        .btn-text {
+            background: transparent;
+            color: #2563EB;
+            padding: 0; /* text型は内側余白をリセット */
+            text-decoration: underline;
+        }
+        .btn-text:hover { color: #1D4ED8; }
+
+        .chip {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 9999px;
+            padding: 0.5rem 0.875rem; /* 8px 14px */
+            font-size: var(--font-body-small);
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        .chip-tech {
+            background-color: #2563EB;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+        .chip-tech:hover { background-color: #1D4ED8; }
+        .chip-meta {
+            background-color: #EEF2FF;
+            color: #1B2C62;
+            border: 1px solid #E0E7FF;
+            font-weight: 500;
+        }
+
+        .card {
+            border-radius: 1rem; /* 16px */
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.15);
+        }
+        .card-portfolio {
+            background: linear-gradient(135deg, #ffffff, #eff6ff);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .card-service {
+            background: #FFFFFF;
+            border: 1px solid rgba(226, 232, 240, 0.7);
+        }
+
+        .link-action {
+            color: #2563EB;
+            text-decoration: underline;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+        .link-action:hover { color: #1D4ED8; }
 
         /* 微細なアニメーション */
         @keyframes float {
@@ -418,7 +508,7 @@
                 <a href="#about" class="nav-link text-body-small latin" style="font-weight: 500;" aria-label="アバウトセクションへ移動">About</a>
                 <a href="#portfolio" class="nav-link text-body-small latin" style="font-weight: 500;" aria-label="ポートフォリオセクションへ移動">Portfolio</a>
                 <a href="#services" class="nav-link text-body-small latin" style="font-weight: 500;" aria-label="サービスセクションへ移動">Services</a>
-                <a href="#contact" class="px-6 py-2 rounded-full text-body-small text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" onmouseover="this.style.background='linear-gradient(135deg, #3B82F6 0%, #1B2C62 100%)'" onmouseout="this.style.background='linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%)'" aria-label="コンタクトセクションへ移動">Contact</a>
+                <a href="#contact" class="btn btn-primary text-body-small hover:shadow-lg hover:-translate-y-0.5" aria-label="コンタクトセクションへ移動">Contact</a>
             </nav>
             <button id="mobile-menu-button" class="md:hidden focus:outline-none text-slate-800 p-2 rounded-lg glass-effect" aria-label="メニューを開く" aria-expanded="false" aria-controls="mobile-menu">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
@@ -431,7 +521,7 @@
             <a href="#portfolio" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50 latin" style="font-weight: 500;" aria-label="ポートフォリオセクションへ移動">Portfolio</a>
             <a href="#services" class="block py-3 px-6 text-body-small text-slate-700 hover:bg-blue-50 latin" style="font-weight: 500;" aria-label="サービスセクションへ移動">Services</a>
             <div class="p-3">
-                <a href="#contact" class="block text-center px-6 py-2 rounded-full text-body-small text-white transition-all duration-300" style="background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%); font-weight: 500;" onmouseover="this.style.background='linear-gradient(135deg, #3B82F6 0%, #1B2C62 100%)'" onmouseout="this.style.background='linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%)'" aria-label="コンタクトセクションへ移動">Contact</a>
+                <a href="#contact" class="block text-center btn btn-primary text-body-small" aria-label="コンタクトセクションへ移動">Contact</a>
             </div>
         </div>
     </header>
@@ -480,7 +570,7 @@
                 
                 <div class="max-w-[1120px] mx-auto">
                     <!-- About Single Card -->
-                    <div class="relative overflow-hidden rounded-3xl md:rounded-[2rem] p-8 md:p-9 shadow-xl reveal bg-gradient-to-br from-white to-blue-50/60 border border-white/50" style="box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);">
+                    <div class="relative overflow-hidden rounded-2xl md:rounded-2xl p-8 md:p-9 shadow-xl reveal bg-gradient-to-br from-white to-blue-50/60 border border-white/50" style="box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);">
                         <div class="absolute -top-20 -right-20 w-72 h-72 bg-gradient-to-br from-blue-200/40 to-indigo-200/40 rounded-full blur-3xl"></div>
                         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl"></div>
                         <div class="relative z-10 max-w-[1440px] mx-auto">
@@ -589,8 +679,8 @@
                                 <div class="relative z-10">
                                     <!-- PC画面 -->
                                     <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
-                                        <div class="bg-white rounded-md w-40 h-24 flex flex-col">
-                                            <div class="bg-blue-500 h-2 rounded-t-md"></div>
+                                        <div class="bg-white rounded-lg w-40 h-24 flex flex-col">
+                                            <div class="bg-blue-500 h-2 rounded-t-lg"></div>
                                             <div class="p-2 flex-1 space-y-1">
                                                 <div class="bg-slate-200 h-1 rounded w-full"></div>
                                                 <div class="bg-slate-200 h-1 rounded w-3/4"></div>
@@ -622,7 +712,7 @@
                         <div class="p-8 relative">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-card-title" style="color: #1B2C62;">サービスLP</h3>
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">LP</span>
+                                <span class="text-caption px-2 py-1 rounded-lg" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">LP</span>
                             </div>
                             <!-- 一行概要 -->
                             <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
@@ -639,7 +729,7 @@
                                 </div>
                                 
                                 <!-- 詳しく見る -->
-                                <span class="text-caption" style="color: #2563EB !important; font-weight: 600; text-decoration: underline;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#2563EB'">詳しく見る ›</span>
+                                <span class="text-caption link-action">詳しく見る ›</span>
                             </div>
                         </div>
                     </div>
@@ -653,8 +743,8 @@
                                 <div class="relative z-10">
                                     <!-- PC画面 -->
                                     <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
-                                        <div class="bg-white rounded-md w-40 h-24 flex flex-col">
-                                            <div class="bg-blue-500 h-2 rounded-t-md"></div>
+                                        <div class="bg-white rounded-lg w-40 h-24 flex flex-col">
+                                            <div class="bg-blue-500 h-2 rounded-t-lg"></div>
                                             <div class="p-2 flex-1 space-y-1">
                                                 <div class="bg-slate-200 h-1 rounded w-full"></div>
                                                 <div class="bg-slate-200 h-1 rounded w-3/4"></div>
@@ -687,7 +777,7 @@
                         <div class="p-8 relative">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-card-title" style="color: #1B2C62;">工務店サイト</h3>
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">Corp</span>
+                                <span class="text-caption px-2 py-1 rounded-lg" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">Corp</span>
                             </div>
                             <!-- 一行概要 -->
                             <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
@@ -704,7 +794,7 @@
                                 </div>
                                 
                                 <!-- 詳しく見る -->
-                                <span class="text-caption" style="color: #2563EB !important; font-weight: 600; text-decoration: underline;" onmouseover="this.style.color='#1D4ED8'" onmouseout="this.style.color='#2563EB'">詳しく見る ›</span>
+                                <span class="text-caption link-action">詳しく見る ›</span>
                             </div>
                         </div>
                     </div>
@@ -718,8 +808,8 @@
                                 <div class="relative z-10">
                                     <!-- PC画面 -->
                                     <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
-                                        <div class="bg-white rounded-md w-40 h-24 flex flex-col">
-                                            <div class="bg-blue-500 h-2 rounded-t-md"></div>
+                                        <div class="bg-white rounded-lg w-40 h-24 flex flex-col">
+                                            <div class="bg-blue-500 h-2 rounded-t-lg"></div>
                                             <div class="p-2 flex-1 space-y-1">
                                                 <div class="bg-slate-200 h-1 rounded w-full"></div>
                                                 <div class="bg-slate-200 h-1 rounded w-3/4"></div>
@@ -751,7 +841,7 @@
                         <div class="p-8 relative">
                             <div class="flex items-center justify-between mb-3">
                                 <h3 class="text-card-title" style="color: #1B2C62;">採用特設サイト</h3>
-                                <span class="text-caption px-2 py-1 rounded-full" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">Corp</span>
+                                <span class="text-caption px-2 py-1 rounded-lg" style="background-color: #F3B93D !important; color: #1B2C62 !important; font-weight: 600;">Corp</span>
                             </div>
                             <!-- 一行概要 -->
                             <p class="text-body mb-4" style="color: #374151; max-width: 32ch;">
@@ -789,7 +879,7 @@
                 
                 <div class="max-w-[1120px] mx-auto grid md:grid-cols-3 items-stretch" style="gap: 24px;">
                     <!-- Service Card 1: ホームページ・LPコーディング代行 -->
-                    <div class="reveal border transition-all duration-300 cursor-pointer group flex flex-col h-full" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; border-radius: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('coding')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('coding');}" aria-label="ホームページ／LPコーディング代行の詳細を見る">
+                    <div class="reveal transition-all duration-300 cursor-pointer group flex flex-col h-full rounded-2xl" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('coding')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('coding');}" aria-label="ホームページ／LPコーディング代行の詳細を見る">
                         <div style="padding: 24px;" class="flex-1 flex flex-col">
                             <div class="flex gap-4 flex-1">
                                 <!-- Icon -->
@@ -823,7 +913,7 @@
                                     
                                     <!-- CTA -->
                                     <div class="flex items-center justify-end mt-auto">
-                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#1B2C62'">
+                                        <button class="btn btn-primary">
                                             詳しく見る
                                         </button>
                                     </div>
@@ -833,7 +923,7 @@
                     </div>
 
                     <!-- Service Card 2: ホームページの運用保守・修正 -->
-                    <div class="reveal border transition-all duration-300 cursor-pointer group flex flex-col h-full" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; border-radius: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease; transition-delay: 200ms;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('maintenance')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('maintenance');}" aria-label="ホームページの運用保守・修正の詳細を見る">
+                    <div class="reveal transition-all duration-300 cursor-pointer group flex flex-col h-full rounded-2xl" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease; transition-delay: 200ms;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('maintenance')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('maintenance');}" aria-label="ホームページの運用保守・修正の詳細を見る">
                         <div style="padding: 24px;" class="flex-1 flex flex-col">
                             <div class="flex gap-4 flex-1">
                                 <!-- Icon -->
@@ -867,7 +957,7 @@
                                     
                                     <!-- CTA -->
                                     <div class="flex items-center justify-end mt-auto">
-                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#1B2C62'">
+                                        <button class="btn btn-primary">
                                             詳しく見る
                                         </button>
                                     </div>
@@ -877,7 +967,7 @@
                     </div>
 
                     <!-- Service Card 3: ブログ更新代行 -->
-                    <div class="reveal border transition-all duration-300 cursor-pointer group flex flex-col h-full" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; border-radius: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease; transition-delay: 400ms;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('blog')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('blog');}" aria-label="ブログ更新代行の詳細を見る">
+                    <div class="reveal transition-all duration-300 cursor-pointer group flex flex-col h-full rounded-2xl" style="background-color: #FBFCFE; border-color: #E6ECF5; border-width: 1px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); transition: all 0.3s ease; transition-delay: 400ms;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 6px 20px rgba(0,0,0,0.06)'" onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 1px 3px rgba(0,0,0,0.05)'" role="button" tabindex="0" onclick="openServiceDetail('blog')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openServiceDetail('blog');}" aria-label="ブログ更新代行の詳細を見る">
                         <div style="padding: 24px;" class="flex-1 flex flex-col">
                             <div class="flex gap-4 flex-1">
                                 <!-- Icon -->
@@ -911,7 +1001,7 @@
                                     
                                     <!-- CTA -->
                                     <div class="flex items-center justify-end mt-auto">
-                                        <button class="px-4 py-2 text-sm font-medium text-white rounded-lg transition-all duration-300 hover:opacity-90" style="background-color: #1B2C62;" onmouseover="this.style.backgroundColor='#1D4ED8'" onmouseout="this.style.backgroundColor='#1B2C62'">
+                                        <button class="btn btn-primary">
                                             詳しく見る
                                         </button>
                                     </div>
@@ -942,18 +1032,18 @@
                     <form id="contact-form" class="space-y-6">
                         <div>
                             <label for="name" class="block text-body-small text-slate-700" style="font-weight: 500;">お名前</label>
-                            <input type="text" name="name" id="name" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                            <input type="text" name="name" id="name" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                         </div>
                         <div>
                             <label for="email" class="block text-body-small text-slate-700" style="font-weight: 500;">メールアドレス</label>
-                            <input type="email" name="email" id="email" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                            <input type="email" name="email" id="email" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
                         </div>
                         <div>
                             <label for="message" class="block text-body-small text-slate-700" style="font-weight: 500;">お問い合わせ内容</label>
-                            <textarea name="message" id="message" rows="4" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-md py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
+                            <textarea name="message" id="message" rows="4" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
                         </div>
                         <div class="text-center pt-4">
-                            <button type="submit" id="submit-btn" class="inline-block text-body-small text-white font-medium py-3 px-10 rounded-full hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-blue-300" style="background: linear-gradient(to right, #1B2C62, #2D4BA8);" onmouseover="this.style.background='linear-gradient(to right, #3B82F6, #1B2C62)'" onmouseout="this.style.background='linear-gradient(to right, #1B2C62, #2D4BA8)'">
+                            <button type="submit" id="submit-btn" class="btn btn-primary text-body-small hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-blue-300">
                                 送信する
                             </button>
                         </div>
@@ -999,7 +1089,7 @@
     
     <!-- ポートフォリオ詳細モーダル -->
     <div id="portfolio-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
-        <div id="modal-content" class="bg-white rounded-lg max-w-3xl w-full max-h-full overflow-y-auto relative">
+        <div id="modal-content" class="bg-white rounded-2xl max-w-3xl w-full max-h-full overflow-y-auto relative">
             <button id="modal-close" class="absolute top-4 right-4 text-slate-500 hover:text-blue-600">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
             </button>
@@ -1640,9 +1730,9 @@
                             <div class="flex-1">
                                 <div class="flex items-baseline gap-4 mb-4">
                                     <h1 class="text-h2 text-slate-900 tracking-tight">${project.title}</h1>
-                                    <span class="bg-gradient-to-r from-slate-800 to-slate-900 text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">${project.category}</span>
+                                    <span class="bg-gradient-to-r from-slate-800 to-slate-900 text-white text-sm px-4 py-1.5 rounded-lg font-medium shadow-sm">${project.category}</span>
                                     ${project.basicAuth ? `
-                                    <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-white text-sm px-4 py-1.5 rounded-full font-medium shadow-sm">認証必須</span>
+                                    <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-white text-sm px-4 py-1.5 rounded-xl font-medium shadow-sm">認証必須</span>
                                     ` : ''}
                                 </div>
                                 
@@ -1660,19 +1750,19 @@
                         <!-- プロジェクトメトリクス -->
                         <div class="pt-6">
                             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-3 border" style="border-color: rgba(15, 23, 42, 0.08); box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
                                 <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">制作期間</div>
                                 <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.period}</div>
                             </div>
-                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-3 border" style="border-color: rgba(15, 23, 42, 0.08); box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
                                 <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">ページ構成</div>
                                 <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.pages}</div>
                             </div>
-                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-3 border" style="border-color: rgba(15, 23, 42, 0.08); box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
                                 <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">担当範囲</div>
                                 <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.role}</div>
                             </div>
-                            <div class="bg-white/80 backdrop-blur-sm rounded-lg p-3 border" style="border-color: rgba(15, 23, 42, 0.08); border-radius: 16px; box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
+                            <div class="bg-white/80 backdrop-blur-sm rounded-xl p-3 border" style="border-color: rgba(15, 23, 42, 0.08); box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);">
                                 <div class="text-caption uppercase tracking-wide mb-1.5" style="font-weight: 500; color: #64748b;">使用技術</div>
                                 <div class="text-body-small" style="font-weight: 700; color: #1B2C62;">${project.technologies.slice(0, 4).join(', ')}</div>
                                 
