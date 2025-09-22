@@ -31,10 +31,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <!-- GSAP（背景アニメ制御用：回転・パルス・パララックス） -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     
-    
+    <!-- Three.jsの読み込み -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
     <!-- ▼ OGP・Twitterカード設定（SNSサムネイル用） ▼ -->
     <meta property="og:title" content="habataki create - 中峰あらみ | Webコーダー" />
@@ -210,11 +209,16 @@
             transform: translateY(0) scale(1);
         }
 
-        /* グラス効果は使用しない（シンプル化） */
-        .glass-effect { background: transparent; backdrop-filter: none; border: none; box-shadow: none; }
-
-        /* ヘッダーは固定の半透明白で可読性を担保 */
-        .header-solid { background: rgba(255, 255, 255, 0.92); backdrop-filter: blur(8px); border-bottom: 1px solid #E2E8F0; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        /* グラスモーフィズム効果 */
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.08),
+                0 1px 3px rgba(0, 0, 0, 0.05),
+                inset 0 1px 0 rgba(255, 255, 255, 0.9);
+        }
 
         /* Three.js背景（light準拠：固定・背面） */
         #bg-canvas {
@@ -224,7 +228,7 @@
             width: 100%;
             height: 100%;
             z-index: 0; /* 本文背景の上に配置 */
-            opacity: 1;
+            opacity: 0.45;
             pointer-events: none; /* 操作を阻害しない */
         }
 
@@ -258,19 +262,64 @@
             width: 100%;
         }
 
-        /* ホバー効果も最小限に */
-        .elegant-hover { transition: transform 0.2s ease, box-shadow 0.2s ease; }
-        .elegant-hover:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+        /* エレガントなホバー効果 */
+        .elegant-hover {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .elegant-hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(99, 102, 241, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: inherit;
+        }
+        
+        .elegant-hover:hover::before {
+            opacity: 1;
+        }
+        
+        .elegant-hover:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px -8px rgba(59, 130, 246, 0.25), 0 8px 20px -4px rgba(0, 0, 0, 0.1);
+        }
 
-        /* ポートフォリオカード - シンプル化 */
-        .portfolio-card { transition: box-shadow 0.2s ease, transform 0.2s ease; position: relative; overflow: hidden; }
-        .portfolio-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.10); }
-        /* ヘッダープレビューは白＋薄枠に統一（全カード） */
-        .portfolio-card .w-full.h-56 { background: #FFFFFF !important; background-image: none !important; border-bottom: 1px solid #E2E8F0 !important; }
-        /* 過剰な変形・装飾を無効化 */
-        .portfolio-card .transform { transform: none !important; }
-        .portfolio-card .blur-sm { display: none !important; }
-        .portfolio-card *:hover { box-shadow: none; }
+        /* ポートフォリオカード - より洗練された */
+        .portfolio-card {
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .portfolio-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .portfolio-card:hover::before {
+            opacity: 1;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 
+                0 25px 50px -12px rgba(0, 0, 0, 0.15),
+                0 8px 20px -4px rgba(59, 130, 246, 0.1);
+        }
 
         /* グラデーションテキスト */
         .gradient-text {
@@ -378,21 +427,14 @@
             transform: translateY(-6px);
             box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.15);
         }
-        .card-portfolio { background: #FFFFFF; border: 1px solid rgba(226,232,240,0.8); }
-        .card-service { background: #FFFFFF; border: 1px solid rgba(226,232,240,0.8); }
-
-        /* Aboutカードもシンプル化 */
-        .about-card { background: #FFFFFF !important; border: 1px solid #E2E8F0 !important; box-shadow: 0 8px 16px rgba(0,0,0,0.08) !important; }
-        .about-card:hover { transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0,0,0,0.10) !important; }
-        .about-card .blur-3xl { display: none !important; }
-
-        /* Servicesのカードもシンプルに（inline styleを上書き） */
-        #services .reveal { transform: none !important; box-shadow: 0 1px 3px rgba(0,0,0,0.06) !important; transition: box-shadow 0.2s ease, transform 0.2s ease !important; }
-        #services .reveal:hover { transform: translateY(-2px) !important; box-shadow: 0 8px 16px rgba(0,0,0,0.08) !important; }
-
-        /* Services 見出しの浮き上がり（reveal/hover）を完全無効化 */
-        #services .text-center.mb-16.reveal { opacity: 1 !important; transform: none !important; transition: none !important; box-shadow: none !important; }
-        #services .text-center.mb-16.reveal:hover { opacity: 1 !important; transform: none !important; box-shadow: none !important; }
+        .card-portfolio {
+            background: linear-gradient(135deg, #ffffff, #eff6ff);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .card-service {
+            background: #FFFFFF;
+            border: 1px solid rgba(226, 232, 240, 0.7);
+        }
 
         .link-action {
             color: #2563EB;
@@ -401,68 +443,6 @@
             transition: color 0.2s ease;
         }
         .link-action:hover { color: #1D4ED8; }
-
-        /* Modal close (統一) */
-        .modal-close {
-            width: 40px;
-            height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            color: #94a3b8; /* slate-400 */
-            transition: all 0.2s ease;
-        }
-        .modal-close:hover {
-            color: #475569; /* slate-600 */
-            background-color: rgba(255, 255, 255, 0.6);
-        }
-        .modal-close:focus-visible {
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
-        }
-
-        /* ================= Layout normalization (sections/cards/spacings) ================ */
-        :root {
-            --section-y: 4rem;      /* 64px（以前:80px） */
-            --header-gap: 3rem;     /* 48px（以前:64px） */
-            --card-pad-m: 1.5rem;   /* 24px（以前:32px） */
-            --card-pad-d: 2.25rem;  /* 36px（以前:48px） */
-        }
-
-        /* Section vertical paddings */
-        section#about, section#portfolio, section#services, section#contact {
-            padding-top: var(--section-y) !important;
-            padding-bottom: var(--section-y) !important;
-        }
-
-        /* Section heading bottom margins (outside cards) */
-        #portfolio .text-center.mb-20,
-        #services .text-center.mb-16,
-        #contact .text-center.mb-16 {
-            margin-bottom: var(--header-gap) !important;
-        }
-
-        /* About card paddings (inside card) */
-        #about .about-card { padding: var(--card-pad-m) !important; }
-        @media (min-width: 768px) {
-            #about .about-card { padding: var(--card-pad-d) !important; }
-        }
-
-        /* About内の大きな区切り（mb-20）を他セクション見出しと同値に整える */
-        #about .about-card .mb-20 { margin-bottom: var(--header-gap) !important; }
-
-        /* Portfolio card body paddings */
-        .portfolio-card > div.p-8 { padding: var(--card-pad-m) !important; }
-        @media (min-width: 768px) {
-            .portfolio-card > div.p-8 { padding: var(--card-pad-d) !important; }
-        }
-
-        /* Services card paddings (override inline styles) */
-        #services .reveal > div[style*="padding"] { padding: var(--card-pad-m) !important; }
-        @media (min-width: 768px) {
-            #services .reveal > div[style*="padding"] { padding: var(--card-pad-d) !important; }
-        }
 
         /* 微細なアニメーション */
         @keyframes float {
@@ -517,15 +497,11 @@
 </head>
 <body class="antialiased">
 
-    <!-- 背景アニメーション用レイヤー（SVG制御） -->
-    <div id="bg-canvas">
-        <div id="bg-parallax" style="width:100%; height:100%; will-change: transform;">
-            <div id="bg-rotate" style="width:100%; height:100%; will-change: transform;"></div>
-        </div>
-    </div>
+    <!-- Three.js アニメーション用キャンバス -->
+    <div id="bg-canvas"></div>
 
     <!-- ヘッダー（洗練されたデザイン） -->
-    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 header-solid">
+    <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 glass-effect border-b border-white/20 shadow-xl">
         <div class="max-w-[1440px] mx-auto px-6 py-5 flex justify-between items-center">
             <a href="#hero" class="text-logo gradient-text tracking-wide latin">habataki create</a>
             <nav class="hidden md:flex items-center space-x-10 text-slate-600" role="navigation" aria-label="メインナビゲーション">
@@ -582,22 +558,20 @@
         </section>
 
         <!-- ② About Section - 中峰あらみさんの人柄と経験 -->
-        <section id="about" class="py-20 md:py-32 relative overflow-hidden" style="background: transparent;">
+        <section id="about" class="py-20 md:py-32 relative overflow-hidden" style="background-color: #F8FAFC;">
             <!-- light準拠: AboutはThree.jsなし（静止背景） -->
             <div class="max-w-[1440px] mx-auto px-6 relative z-10">
-                
+                <div class="text-center mb-20 reveal section-divider relative">
+                    <h2 class="text-h1 mb-4" style="color: #1B2C62;">About</h2>
+                    <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">私について</p>
+                </div>
                 
                 <div class="max-w-[1120px] mx-auto">
                     <!-- About Single Card -->
-                    <div class="about-card relative overflow-hidden rounded-2xl md:rounded-2xl p-8 md:p-9 reveal bg-white border border-slate-200">
+                    <div class="relative overflow-hidden rounded-2xl md:rounded-2xl p-8 md:p-9 shadow-xl reveal bg-gradient-to-br from-white to-blue-50/60 border border-white/50" style="box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);">
                         <div class="absolute -top-20 -right-20 w-72 h-72 bg-gradient-to-br from-blue-200/40 to-indigo-200/40 rounded-full blur-3xl"></div>
                         <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-gradient-to-br from-blue-200/30 to-indigo-200/30 rounded-full blur-3xl"></div>
                         <div class="relative z-10 max-w-[1440px] mx-auto">
-                            <!-- ヘッダー（小ラベル＋H2） -->
-                            <div class="mb-20 text-center">
-                                <h2 class="text-h1 mb-2" style="color: #1B2C62;">About</h2>
-                                <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">私について</p>
-                            </div>
                             <!-- プロフィール基本情報（リファレンス構造） -->
                             <div class="max-w-[1120px] mx-auto grid md:grid-cols-3 gap-12 items-center mb-20">
                                 <!-- 左：プロフィール画像（1/3幅） -->
@@ -619,11 +593,54 @@
                                 </div>
                             </div>
 
-                            
+                            <!-- 強み（独立セクション） -->
+                            <div class="mt-20">
+                                <h3 class="text-h2 text-center mb-10" style="color: #1B2C62;">Strengths</h3>
+                                <div class="grid md:grid-cols-3 gap-8 max-w-[1120px] mx-auto">
+                                    <!-- 強み1: 正確性・再現性 -->
+                                    <div class="group">
+                                        <div class="relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:shadow-lg text-center" style="background: linear-gradient(135deg, #1B2C6215, #1B2C6208); border: 1px solid #1B2C6220;">
+                                            <div class="absolute top-0 right-0 w-16 h-16 opacity-10" style="background: radial-gradient(circle, #1B2C62 0%, transparent 70%);"></div>
+                                            <div class="relative z-10">
+                                                <svg class="w-8 h-8 mx-auto mb-4" style="color: #1B2C62;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                                </svg>
+                                                <h4 class="text-card-title text-slate-800">正確性・再現性</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 強み2: 柔軟性・対応力 -->
+                                    <div class="group">
+                                        <div class="relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:shadow-lg text-center" style="background: linear-gradient(135deg, #2D4BA815, #2D4BA808); border: 1px solid #2D4BA820;">
+                                            <div class="absolute top-0 right-0 w-16 h-16 opacity-10" style="background: radial-gradient(circle, #2D4BA8 0%, transparent 70%);"></div>
+                                            <div class="relative z-10">
+                                                <svg class="w-8 h-8 mx-auto mb-4" style="color: #2D4BA8;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                                </svg>
+                                                <h4 class="text-card-title text-slate-800">柔軟性・対応力</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- 強み3: 責任感・継続力 -->
+                                    <div class="group">
+                                        <div class="relative overflow-hidden rounded-xl p-6 transition-all duration-300 hover:shadow-lg text-center" style="background: linear-gradient(135deg, #1B2C6215, #1B2C6208); border: 1px solid #1B2C6220;">
+                                            <div class="absolute top-0 right-0 w-16 h-16 opacity-10" style="background: radial-gradient(circle, #1B2C62 0%, transparent 70%);"></div>
+                                            <div class="relative z-10">
+                                                <svg class="w-8 h-8 mx-auto mb-4" style="color: #1B2C62;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                                                </svg>
+                                                <h4 class="text-card-title text-slate-800">責任感・継続力</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
 
                             <!-- 下段：Skills（全幅中央配置） -->
-                            <div class="text-center mt-8 md:mt-10">
+                            <div class="text-center mt-24">
                                 <h3 class="text-h2 mb-8 relative inline-block" style="color: #1B2C62;">
                                     Skills
                                     <div class="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-16 h-0.5" style="background: linear-gradient(to right, #1B2C62, #2D4BA8);"></div>
@@ -655,11 +672,11 @@
                     <div class="portfolio-card reveal glass-effect rounded-2xl overflow-hidden group cursor-pointer shadow-xl border border-white/20 relative" role="button" tabindex="0" onclick="openPortfolioDetail('caresend')" onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); openPortfolioDetail('caresend');}">
                         <div class="relative overflow-hidden">
                             <!-- 制作会社向け：実装画面のプレビュー風 -->
-                            <div class="w-full h-56 bg-white border-b border-slate-200 flex items-center justify-center relative p-4">
+                            <div class="w-full h-56 bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center relative p-4">
                                 <!-- デバイスモックアップ（PC+スマホ） -->
                                 <div class="relative z-10">
                                     <!-- PC画面 -->
-                                    <div class="bg-slate-800 rounded-lg p-2 shadow-lg">
+                                    <div class="bg-slate-800 rounded-lg p-2 shadow-lg transform -rotate-2 group-hover:rotate-0 transition-all duration-500">
                                         <div class="bg-white rounded-lg w-40 h-24 flex flex-col">
                                             <div class="bg-blue-500 h-2 rounded-t-lg"></div>
                                             <div class="p-2 flex-1 space-y-1">
@@ -670,7 +687,7 @@
                                         </div>
                                     </div>
                                     <!-- スマホ画面 -->
-                                    <div class="absolute -bottom-2 -right-6 bg-slate-700 rounded-lg p-1 shadow-lg">
+                                    <div class="absolute -bottom-2 -right-6 bg-slate-700 rounded-lg p-1 shadow-lg transform rotate-12 group-hover:rotate-6 transition-all duration-500">
                                         <div class="bg-white rounded w-8 h-14 flex flex-col">
                                             <div class="bg-blue-500 h-1 rounded-t"></div>
                                             <div class="p-1 flex-1 space-y-0.5">
@@ -681,7 +698,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <!-- 装飾要素 -->
+                                <div class="absolute top-2 right-2 w-8 h-8 bg-blue-200/20 rounded-full blur-sm"></div>
+                                <div class="absolute bottom-4 left-4 w-6 h-6 bg-indigo-200/20 rounded-full blur-sm"></div>
                             </div>
                             <!-- ステータス行 -->
                             <div class="absolute top-4 left-4 z-10">
@@ -743,7 +762,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                
+                                <!-- 装飾要素 -->
+                                <div class="absolute top-3 right-8 w-3 h-3 bg-orange-300/40 rounded-full"></div>
+                                <div class="absolute bottom-8 left-8 w-2 h-2 bg-amber-300/40 rounded-full"></div>
+                                <div class="absolute top-8 left-12 w-1 h-1 bg-orange-400/60 rounded-full"></div>
                             </div>
                             <!-- ステータス行 -->
                             <div class="absolute top-4 left-4 z-10">
@@ -845,7 +867,7 @@
         </section>
 
         <!-- ④ Services Section - 中峰さんならではのサービス -->
-        <section id="services" class="py-20 md:py-32 relative overflow-hidden" style="background: transparent;">
+        <section id="services" class="py-20 md:py-32 relative overflow-hidden" style="background-color: #EEF2FF;">
             <div class="max-w-[1440px] mx-auto px-6 relative z-10">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-h1 mb-4" style="color: #1B2C62;">Services</h2>
@@ -1062,7 +1084,17 @@
         </div>
     </footer>
     
-    
+    <!-- ポートフォリオ詳細モーダル -->
+    <div id="portfolio-modal" class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
+        <div id="modal-content" class="bg-white rounded-2xl max-w-3xl w-full max-h-full overflow-y-auto relative">
+            <button id="modal-close" class="absolute top-4 right-4 text-slate-500 hover:text-blue-600">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+            <div id="modal-body" class="p-8 md:p-12">
+                <!-- コンテンツはJSで動的に挿入されます -->
+            </div>
+        </div>
+    </div>
 
     <style>
         @keyframes fade-in-up {
@@ -1163,99 +1195,66 @@
 
         // Home: light準拠 → グローバル背景に統一するため非適用
 
-        // --- SVGグリッド背景（GSAP制御：回転・パルス・パララックス） ---
-        // 中峰さん向けメモ（調整ノブ）
-        // - ドット間隔: 24/28/32px（デスクトップ/タブレット/モバイル）
-        // - 回転: 0.4°/秒（linear）、最大±8°
-        // - パララックス: 平行移動 ±6〜8px、追従200〜280ms（モバイルは半分）
-        // - パルス: 6s、sine.inOut、yoyo、+0.05〜0.08（reduce-motion時は停止）
-        (function initBackgroundGrid(){
+        // --- Global Three.js Background (light準拠：#bg-canvasにワイヤーフレーム群) ---
+        let bgRenderer = null;
+        let bgCamera = null;
+        (function initGlobalBackground(){
             const container = document.getElementById('bg-canvas');
             if (!container) return;
+
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
+            // container自体がdivのため、canvasを子要素として追加
+            const canvasEl = renderer.domElement;
+            canvasEl.style.width = '100%';
+            canvasEl.style.height = '100%';
+            canvasEl.style.display = 'block';
+            container.innerHTML = '';
+            container.appendChild(canvasEl);
+
+            const objects = [];
+            const geometry = new THREE.IcosahedronGeometry(1, 0);
+            const material = new THREE.MeshBasicMaterial({ color: 0x2D4BA8, wireframe: true, transparent: true, opacity: 0.25 });
+            for (let i = 0; i < 60; i++) {
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.position.x = (Math.random() - 0.5) * 30;
+                mesh.position.y = (Math.random() - 0.5) * 30;
+                mesh.position.z = (Math.random() - 0.5) * 30;
+                const s = Math.random() * 0.35 + 0.2;
+                mesh.scale.set(s, s, s);
+                mesh.rotation.x = Math.random() * Math.PI * 2;
+                mesh.rotation.y = Math.random() * Math.PI * 2;
+                objects.push(mesh);
+                scene.add(mesh);
+            }
+            camera.position.z = 12;
+
             const prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            const svgNS = 'http://www.w3.org/2000/svg';
-
-            function buildGrid(gap){
-                const rotateHost = document.getElementById('bg-rotate');
-                if (!rotateHost) return;
-                rotateHost.innerHTML = '';
-                const svg = document.createElementNS(svgNS, 'svg');
-                svg.setAttribute('width','140vw');
-                svg.setAttribute('height','140vh');
-                svg.style.position = 'fixed';
-                svg.style.top = '-20vh';
-                svg.style.left = '-20vw';
-                svg.style.zIndex = '0';
-                svg.style.pointerEvents = 'none';
-
-                const defs = document.createElementNS(svgNS, 'defs');
-                const pattern = document.createElementNS(svgNS, 'pattern');
-                pattern.setAttribute('id', 'dotPattern');
-                pattern.setAttribute('patternUnits', 'userSpaceOnUse');
-                pattern.setAttribute('width', String(gap));
-                pattern.setAttribute('height', String(gap));
-
-                const circle = document.createElementNS(svgNS, 'circle');
-                circle.setAttribute('cx', '1');
-                circle.setAttribute('cy', '1');
-                circle.setAttribute('r',  '1');
-                circle.setAttribute('fill', '#1B2C62');
-                circle.setAttribute('opacity', '0.12');
-
-                pattern.appendChild(circle);
-                defs.appendChild(pattern);
-                svg.appendChild(defs);
-
-                const rect = document.createElementNS(svgNS, 'rect');
-                rect.setAttribute('width',  '100%');
-                rect.setAttribute('height', '100%');
-                rect.setAttribute('fill', 'url(#dotPattern)');
-                svg.appendChild(rect);
-
-                rotateHost.appendChild(svg);
-                return { svg, rotateHost };
+            function animate(){
+                if (prefersReduced){ renderer.render(scene, camera); return; }
+                requestAnimationFrame(animate);
+                objects.forEach(o => { o.rotation.x += 0.003; o.rotation.y += 0.003; });
+                renderer.render(scene, camera);
             }
+            animate();
 
-            function gapByViewport(){
-                const w = Math.min(window.innerWidth, 1440);
-                if (w >= 1200) return 24; // デスクトップ
-                if (w >= 768)  return 28; // タブレット
-                return 32;                 // モバイル
-            }
-
-            // 初期表示
-            const { rotateHost } = buildGrid(gapByViewport()) || {};
-            window.addEventListener('resize', ()=>{ try { buildGrid(gapByViewport()); } catch(e){} });
-
-            // === GSAP制御 ===
-            const parallax = document.getElementById('bg-parallax');
-            if (!parallax || !rotateHost) return;
-
-            if (!prefersReduced && window.gsap) {
-                // 初期角度を -8° にして等速回転（-8°→+8°→-8°... 0.4°/秒 = 40s/16°）
-                gsap.set(rotateHost, { rotation: -8, transformOrigin: '50% 50%' });
-                gsap.to(rotateHost, { rotation: 8, duration: 40, ease: 'none', yoyo: true, repeat: -1 });
-
-                // パルス（opacity +0.06, 6s, yoyo, sine.inOut）
-                gsap.to(rotateHost, { opacity: 0.94, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
-
-                // パララックス（平行移動：最大 ±8px、補間200–280ms；モバイルは半分）
-                const amplitude = window.innerWidth < 768 ? 8 * 0.5 : 8;
-                const toX = gsap.quickTo(parallax, 'x', { duration: 0.24, ease: 'sine.out' });
-                const toY = gsap.quickTo(parallax, 'y', { duration: 0.24, ease: 'sine.out' });
-                const handlePointer = (e) => {
-                    const cx = (e.clientX ?? (e.touches && e.touches[0].clientX) ?? window.innerWidth/2) / window.innerWidth;
-                    const cy = (e.clientY ?? (e.touches && e.touches[0].clientY) ?? window.innerHeight/2) / window.innerHeight;
-                    const dx = (cx - 0.5) * (amplitude * 2); // ±amplitude
-                    const dy = (cy - 0.5) * (amplitude * 2);
-                    toX(dx);
-                    toY(dy);
-                };
-                window.addEventListener('mousemove', handlePointer, { passive: true });
-                window.addEventListener('touchmove', handlePointer, { passive: true });
-            }
+            // expose for resize handler
+            bgRenderer = renderer;
+            bgCamera = camera;
         })();
 
+
+        // リサイズ対応（グローバル背景のみ）
+        window.addEventListener('resize', () => {
+            if (bgRenderer && bgCamera) {
+                bgRenderer.setSize(window.innerWidth, window.innerHeight);
+                bgCamera.aspect = window.innerWidth / window.innerHeight;
+                bgCamera.updateProjectionMatrix();
+            }
+        });
 
         // --- スクロール連動アニメーション ---
         const revealElements = document.querySelectorAll('.reveal');
@@ -1581,24 +1580,17 @@
             
             // フォーカス管理
             const previousActiveElement = document.activeElement;
-            window._prevPortfolioFocus = previousActiveElement;
-            
-            // スクロールロック
-            if (!document.body.dataset.prevOverflow) {
-                document.body.dataset.prevOverflow = getComputedStyle(document.body).overflow;
-            }
-            document.body.style.overflow = 'hidden';
             
             // バランスの取れたプロフェッショナルモーダル
             modalContent.innerHTML = `
                 <div class="relative max-w-[800px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden w-full border border-slate-100">
                     <!-- ① エレガントヘッダー -->
-                    <div class="relative bg-white px-6 md:px-9 py-6 md:py-9 border-b border-slate-200">
+                    <div class="relative bg-gradient-to-br from-slate-50 to-blue-50/20 px-16 py-8">
                         <!-- タイトルライン -->
                         <div class="flex items-start justify-between mb-6">
                             <div class="flex-1">
                                 <div class="flex items-baseline gap-4 mb-4">
-                                    <h1 id="modal-title" class="text-h2 text-slate-900 tracking-tight">${project.title}</h1>
+                                    <h1 class="text-h2 text-slate-900 tracking-tight">${project.title}</h1>
                                     <span class="bg-gradient-to-r from-slate-800 to-slate-900 text-white text-sm px-4 py-1.5 rounded-lg font-medium shadow-sm">${project.category}</span>
                                     ${project.basicAuth ? `
                                     <span class="bg-gradient-to-r from-amber-400 to-amber-500 text-white text-sm px-4 py-1.5 rounded-xl font-medium shadow-sm">認証必須</span>
@@ -1609,7 +1601,7 @@
                                 <p class="text-body-large text-slate-700 max-w-3xl">${project.description}</p>
                             </div>
                             
-                            <button onclick="closePortfolioDetail()" class="ml-6 modal-close" aria-label="モーダルを閉じる">
+                            <button onclick="closePortfolioDetail()" class="ml-6 p-3 text-slate-400 hover:text-slate-600 hover:bg-white/60 rounded-xl transition-all duration-200">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
                                 </svg>
@@ -1641,7 +1633,7 @@
                     </div>
 
                     <!-- ② 1カラム統合レイアウト -->
-                    <div class="px-6 md:px-9 py-6 md:py-9">
+                    <div class="px-16 py-10">
                         <div class="space-y-10">
 
                             <!-- 実装機能 -->
@@ -1730,10 +1722,12 @@
                     </div>
 
                     <!-- ④ 認証情報統合フッター -->
-                    <div class="px-6 md:px-9 py-6 border-t" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(6px); border-color: #E5E7EB;">
+                    <div class="px-16 py-8 border-t" style="background: linear-gradient(to right, #1B2C62, #2D4BA8); border-color: rgba(27, 44, 98, 0.3);">
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
                             <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
-                                <button onclick="closePortfolioDetail()" class="btn btn-secondary text-body-small">閉じる</button>
+                                <button onclick="closePortfolioDetail()" class="px-5 py-2.5 text-white/80 hover:text-white hover:bg-white/10 rounded-lg transition-all duration-200 font-medium w-fit">
+                                    閉じる
+                                </button>
                                 
                                 ${project.basicAuth ? `
                                 <div class="flex items-center gap-3 text-sm text-white/80">
@@ -1751,7 +1745,7 @@
                             </div>
                             
                             <div class="flex justify-end">
-                                <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary text-body-small" style="padding: 12px 24px; border-radius: 12px;">
+                                <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="px-8 py-3 text-white font-semibold rounded-xl transition-all duration-200 flex items-center gap-2 shadow-lg hover:shadow-xl w-fit hover:scale-105" style="background: linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0.1)); border: 1px solid rgba(255,255,255,0.3);" onmouseover="this.style.background='linear-gradient(to right, rgba(255,255,255,0.3), rgba(255,255,255,0.2))'" onmouseout="this.style.background='linear-gradient(to right, rgba(255,255,255,0.2), rgba(255,255,255,0.1))'">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
                                     </svg>
@@ -1773,6 +1767,15 @@
             if (firstFocusable) {
                 firstFocusable.focus();
             }
+            
+            // ESCキーで閉じる
+            const handleEscape = (e) => {
+                if (e.key === 'Escape') {
+                    closePortfolioDetail();
+                    document.removeEventListener('keydown', handleEscape);
+                }
+            };
+            document.addEventListener('keydown', handleEscape);
             
             setTimeout(() => {
                 modal.classList.remove('opacity-0');
@@ -1803,17 +1806,6 @@
             // イベントリスナー削除
             document.removeEventListener('keydown', handleEscKey);
             modal.removeEventListener('click', handleBackgroundClick);
-
-            // スクロールロック解除
-            if (document.body.dataset.prevOverflow) {
-                document.body.style.overflow = document.body.dataset.prevOverflow;
-                delete document.body.dataset.prevOverflow;
-            } else {
-                document.body.style.overflow = '';
-            }
-
-            // フォーカス返却
-            try { window._prevPortfolioFocus && window._prevPortfolioFocus.focus(); } catch(e) {}
         };
 
         // ESCキーハンドラー
@@ -2074,16 +2066,16 @@
         const modalContent = document.getElementById('service-modal-content');
         
         modalContent.innerHTML = `
-            <div class="w-full max-w-[720px] mx-auto bg-white relative flex flex-col h-full" role="dialog" aria-modal="true" aria-labelledby="service-modal-title">
+            <div class="w-full max-w-[720px] mx-auto bg-white relative flex flex-col h-full" role="dialog" aria-modal="true" aria-labelledby="modal-title">
                 <!-- ヘッダー -->
-                <div class="flex items-center justify-between px-6 md:px-9 py-6 md:py-9">
+                <div class="flex items-center justify-between px-6 py-6">
                     <div>
-                        <h1 id="service-modal-title" class="text-h2 text-slate-900 tracking-tight">${service.title}</h1>
+                        <h1 id="modal-title" class="text-h2 text-slate-900 tracking-tight">${service.title}</h1>
                         <p class="text-body-small" style="color: #1B2C62; font-weight: 500;">価格目安：${service.price.from}</p>
                     </div>
-                    <button onclick="closeServiceDetail()" class="modal-close" aria-label="モーダルを閉じる">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 18L18 6M6 6l12 12"></path>
+                    <button onclick="closeServiceDetail()" class="text-slate-400 hover:text-slate-600 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500" style="width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;" aria-label="モーダルを閉じる">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"></path>
                         </svg>
                     </button>
                 </div>
@@ -2091,7 +2083,7 @@
                 <!-- メインコンテンツ -->
                 <div class="flex-1 overflow-y-auto">
                     <!-- 概要 -->
-                    <div class="px-6 md:px-9">
+                    <div class="px-6">
                         <h2 class="text-card-title mb-4" style="color: #1B2C62;">サービス概要</h2>
                         <p class="text-body mb-5" style="color: #374151;">${service.overview}</p>
                         <div class="w-full h-px mb-5" style="background-color: #E6ECF5;"></div>
@@ -2099,7 +2091,7 @@
 
 
                     <!-- 品質基準・体制 -->
-                    <div class="px-6 md:px-9">
+                    <div class="px-6">
                         <h2 class="text-card-title mb-4" style="color: #1B2C62;">品質基準・体制</h2>
                         <div class="flex flex-wrap mb-5" style="gap: 8px 12px;">
                             ${service.assuranceChips.map(chip => `
@@ -2110,7 +2102,7 @@
                     </div>
 
                     <!-- 作業範囲 -->
-                    <div class="px-6 md:px-9">
+                    <div class="px-6">
                         <h2 class="text-card-title mb-4" style="color: #1B2C62;">作業範囲</h2>
                         <div class="grid md:grid-cols-2 gap-6 mb-5">
                             <!-- 含むこと -->
@@ -2137,7 +2129,7 @@
                     </div>
 
                     <!-- 追加オプション -->
-                    <div class="px-6 md:px-9">
+                    <div class="px-6">
                         <h2 class="text-card-title mb-4" style="color: #1B2C62;">追加オプション</h2>
                         <div class="flex flex-wrap mb-5" style="gap: 8px 12px;">
                             ${service.options.map(option => `
@@ -2148,7 +2140,7 @@
                     </div>
 
                     <!-- 価格の決め方 -->
-                    <div class="px-6 md:px-9 pb-24">
+                    <div class="px-6 pb-24">
                         <h2 class="text-card-title mb-4" style="color: #1B2C62;">価格の決め方</h2>
                         <div class="flex flex-wrap" style="gap: 8px 12px;">
                             ${service.estimateBasis.map(basis => `
@@ -2159,10 +2151,10 @@
                 </div>
 
                 <!-- フッター（sticky） -->
-                <div class="sticky bottom-0 border-t px-6 md:px-9 py-6" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(6px); border-color: #E5E7EB;">
+                <div class="sticky bottom-0 border-t px-6 py-4" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(6px); border-color: #E5E7EB;">
                     <div class="flex items-center justify-between">
                         <a href="#portfolio" class="text-body-small text-slate-600 hover:text-slate-800 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 hidden md:block" style="focus:ring-color: #1B2C62;">制作の流れ＆料金</a>
-                        <a href="#contact" onclick="closeServiceDetail()" class="btn btn-primary text-body-small">
+                        <a href="#contact" onclick="closeServiceDetail()" class="px-6 py-3 text-body-small text-white font-medium transition-all duration-300 hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2" style="background-color: #1B2C62; height: 44px; border-radius: 10px; display: flex; align-items: center; focus:ring-color: #1B2C62;">
                             見積もり・空き状況
                         </a>
                     </div>
@@ -2170,7 +2162,6 @@
             </div>
         `;
 
-        // モーダル表示
         // モーダル表示
         modal.classList.remove('hidden');
         setTimeout(() => {
