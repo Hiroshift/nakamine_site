@@ -50,8 +50,8 @@
         /* タイポグラフィシステム - Figma設定に基づく統一化 */
         :root {
             /* Display (Hero見出し) */
-            --font-display: 48px;
-            --font-display-weight: 680;
+            --font-display: clamp(40px, 4.5vw, 56px);
+            --font-display-weight: 700;
             --font-display-line-height: 1.2;
             
             /* Heading 1 (セクション見出し) */
@@ -102,6 +102,8 @@
         
         /* タイポグラフィユーティリティクラス */
         .text-display { font-size: var(--font-display); font-weight: var(--font-display-weight); line-height: var(--font-display-line-height); text-shadow: 0 1px 2px rgba(0,0,0,0.12); }
+        /* 金色の強調文: 影を控えめにしてエッジをシャープに */
+        .accent-shadow { text-shadow: 0 1px 1px rgba(0,0,0,0.16), 0 2px 6px rgba(0,0,0,0.08); }
         .text-h1 { 
             font-size: var(--font-h1); 
             font-weight: var(--font-h1-weight); 
@@ -527,15 +529,15 @@
     <main class="relative z-10">
         <!-- ① Hero Section - 洗練されたデザイン -->
         <section id="home" class="min-h-screen flex items-center justify-center text-center relative overflow-hidden" style="background: transparent;">
-            <div class="relative max-w-[1440px] mx-auto px-6 z-10">
+            <div class="relative max-w-[1120px] mx-auto px-6 z-10">
                 
                 <!-- メインキャッチコピー -->
-                <h1 class="text-display tracking-tight reveal mb-8">
-                    <span style="color: #1B2C62;">デザインを</span><span style="color: #F3B93D;">忠実に再現する</span><span style="color: #1B2C62;">、正確なコーディング</span>
+                <h1 class="text-display tracking-tight reveal mb-8 balance max-w-[820px] mx-auto" style="letter-spacing: -0.01em;">
+                    <span class="lg:whitespace-nowrap" style="color: #1B2C62;">デザインを</span><span class="lg:whitespace-nowrap accent-shadow" style="color: #F3B93D;">忠実に再現する、</span><br class="hidden lg:block"><span class="lg:whitespace-nowrap" style="color: #1B2C62;">正確なコーディング</span>
                 </h1>
                 
                 <!-- サブタイトル -->
-                <p class="mt-4 text-body-large reveal" style="transition-delay: 200ms; font-weight: 300; line-height: 1.6; color: #374151;">
+                <p class="mt-4 text-body-large reveal" style="transition-delay: 200ms; font-weight: 400; line-height: 1.6; color: #374151;">
                     支給デザインを現場基準で再現。レスポンシブ・WordPressまで一貫対応。
                 </p>
                 
@@ -1181,6 +1183,15 @@
                 const rect = document.createElementNS(svgNS, 'rect');
                 rect.setAttribute('width',  '100%');
                 rect.setAttribute('height', '100%');
+                // ベースに白の薄いオーバーレイ → 背景だけ明るく、ドットはそのまま表示
+                const base = document.createElementNS(svgNS, 'rect');
+                base.setAttribute('width',  '100%');
+                base.setAttribute('height', '100%');
+                // 背景ベース: 純白で固定（以前: rgba(255,255,255,0.14→0.20→0.40)）
+                base.setAttribute('fill', '#ffffff');
+                // 復帰用サンプル: base.setAttribute('fill', 'rgba(255,255,255,0.24)');
+                svg.appendChild(base);
+
                 rect.setAttribute('fill', 'url(#dotPattern)');
                 svg.appendChild(rect);
 
@@ -1208,8 +1219,10 @@
                 gsap.set(rotateHost, { rotation: -8, transformOrigin: '50% 50%' });
                 gsap.to(rotateHost, { rotation: 8, duration: 40, ease: 'none', yoyo: true, repeat: -1 });
 
-                // パルス（opacity +0.06, 6s, yoyo, sine.inOut）
-                gsap.to(rotateHost, { opacity: 0.94, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+                // パルス（以前: opacity 0.94⇄0.88, 6s, yoyo）
+                // いまは純白ベース維持のため停止。戻す場合は下記を使用:
+                // gsap.to(rotateHost, { opacity: 0.88, duration: 6, ease: 'sine.inOut', yoyo: true, repeat: -1 });
+                gsap.set(rotateHost, { opacity: 1 });
 
                 // パララックス（平行移動：最大 ±8px、補間200–280ms；モバイルは半分）
                 const amplitude = window.innerWidth < 768 ? 8 * 0.5 : 8;
