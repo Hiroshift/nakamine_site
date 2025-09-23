@@ -50,9 +50,9 @@
         /* タイポグラフィシステム - Figma設定に基づく統一化 */
         :root {
             /* Display (Hero見出し) */
-            --font-display: 40px;
+            --font-display: 48px;
             --font-display-weight: 680;
-            --font-display-line-height: 1.1;
+            --font-display-line-height: 1.2;
             
             /* Heading 1 (セクション見出し) */
             --font-h1: 48px;
@@ -101,11 +101,7 @@
         }
         
         /* タイポグラフィユーティリティクラス */
-        .text-display { 
-            font-size: var(--font-display); 
-            font-weight: var(--font-display-weight); 
-            line-height: var(--font-display-line-height); 
-        }
+        .text-display { font-size: var(--font-display); font-weight: var(--font-display-weight); line-height: var(--font-display-line-height); text-shadow: 0 1px 2px rgba(0,0,0,0.12); }
         .text-h1 { 
             font-size: var(--font-h1); 
             font-weight: var(--font-h1-weight); 
@@ -322,21 +318,11 @@
             outline: none;
             box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.4);
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #1B2C62 0%, #2D4BA8 100%);
-            color: #FFFFFF;
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #3B82F6 0%, #1B2C62 100%);
-        }
-        .btn-secondary {
-            background: transparent;
-            color: #1B2C62;
-            border: 1px solid #1B2C62;
-        }
-        .btn-secondary:hover {
-            background-color: #EEF2FF;
-        }
+        :root { --color-primary:#1B2C62; --color-accent:#F3B93D; --color-support:#2563EB; }
+        .btn-primary { background: linear-gradient(135deg, var(--color-primary) 0%, #2D4BA8 100%); color: #FFFFFF; }
+        .btn-primary:hover { background: linear-gradient(135deg, var(--color-primary) 0%, #1B2C62 100%); }
+        .btn-secondary { background: transparent; color: var(--color-primary); border: 1px solid var(--color-primary); }
+        .btn-secondary:hover { background-color: #F8FAFC; }
         .btn-text {
             background: transparent;
             color: #2563EB;
@@ -394,13 +380,8 @@
         #services .text-center.mb-16.reveal { opacity: 1 !important; transform: none !important; transition: none !important; box-shadow: none !important; }
         #services .text-center.mb-16.reveal:hover { opacity: 1 !important; transform: none !important; box-shadow: none !important; }
 
-        .link-action {
-            color: #2563EB;
-            text-decoration: underline;
-            font-weight: 600;
-            transition: color 0.2s ease;
-        }
-        .link-action:hover { color: #1D4ED8; }
+        .link-action { color: var(--color-primary); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 2px; text-decoration-color: var(--color-accent); font-weight: 700; transition: color 0.2s ease; }
+        .link-action:hover { color: #122148; text-decoration-color: var(--color-accent); }
 
         /* Modal close (統一) */
         .modal-close {
@@ -475,16 +456,7 @@
         }
 
         /* セクション区切り */
-        .section-divider::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            width: 80px;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #e2e8f0, transparent);
-            transform: translateX(-50%);
-        }
+        .section-divider::before { content:''; position:absolute; top:0; left:50%; width:96px; height:2px; background: linear-gradient(90deg, transparent, var(--color-accent), transparent); transform: translateX(-50%); }
         
         /* パルス効果のアニメーション */
         @keyframes pulse-ring {
@@ -643,7 +615,7 @@
         </section>
 
         <!-- ③ Portfolio Section - 中峰さんの学習成果と実績 -->
-        <section id="portfolio" class="py-20 md:py-32" style="background-color: #FFFFFF;">
+        <section id="portfolio" class="py-20 md:py-32" style="background-color: #EEF2FF;">
             <div class="max-w-[1440px] mx-auto px-6">
                 <div class="text-center mb-20 reveal section-divider relative">
                     <h2 class="text-h1 mb-4" style="color: #1B2C62;">Portfolio</h2>
@@ -845,10 +817,10 @@
         </section>
 
         <!-- ④ Services Section - 中峰さんならではのサービス -->
-        <section id="services" class="py-20 md:py-32 relative overflow-hidden" style="background: transparent;">
+        <section id="services" class="py-20 md:py-32 relative overflow-hidden" style="background-color: #1B2C62;">
             <div class="max-w-[1440px] mx-auto px-6 relative z-10">
                 <div class="text-center mb-16 reveal">
-                    <h2 class="text-h1 mb-4" style="color: #1B2C62;">Services</h2>
+                    <h2 class="text-h1 mb-4" style="color: #FFFFFF;">Services</h2>
                     <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">提供サービス</p>
                 </div>
                 
@@ -993,13 +965,13 @@
             <div class="max-w-[1440px] mx-auto px-6">
                 <div class="text-center mb-16 reveal">
                     <h2 class="text-h1 mb-4" style="color: #1B2C62;">Contact</h2>
-                    <p class="text-body-large" style="color: #2563EB; font-weight: 300;">お気軽にご相談ください</p>
+                    <p class="text-body-large" style="color: #F3B93D; font-weight: 300;">お気軽にご相談ください</p>
                 </div>
                 
                 <div class="max-w-2xl mx-auto text-center mb-8 reveal">
                     <div class="bg-blue-50 p-6 rounded-lg mb-8">
-                        <h3 class="text-body-large mb-2" style="color: #1B2C62; font-weight: 600;">対応時間</h3>
-                        <p class="text-body" style="color: #1B2C62;">平日 9:30〜18:00（休日対応可）</p>
+                        <h3 class="text-body-large mb-2" style="color: #1B2C62; font-weight: 600;">営業時間</h3>
+                        <p class="text-body" style="color: #1B2C62;">4時〜6時、10時〜16時<br>連絡は24時間対応可能</p>
                     </div>
                 </div>
 
@@ -1018,7 +990,7 @@
                             <textarea name="message" id="message" rows="4" required class="mt-1 block w-full text-body bg-slate-100 border-slate-300 rounded-lg py-3 px-4 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition"></textarea>
                         </div>
                         <div class="text-center pt-4">
-                            <button type="submit" id="submit-btn" class="btn btn-primary text-body-small hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-blue-300">
+                            <button type="submit" id="submit-btn" class="btn btn-primary text-body-small hover:scale-105 transform transition-all duration-300 shadow-lg hover:shadow-blue-300" style="padding: 12px 24px; min-height: 44px;">
                                 送信する
                             </button>
                         </div>
@@ -1591,7 +1563,7 @@
             
             // バランスの取れたプロフェッショナルモーダル
             modalContent.innerHTML = `
-                <div class="relative max-w-[800px] mx-auto bg-white rounded-2xl shadow-2xl overflow-hidden w-full border border-slate-100">
+                <div class="relative max-w-[800px] mx-auto bg-white shadow-2xl overflow-hidden w-full border border-slate-100">
                     <!-- ① エレガントヘッダー -->
                     <div class="relative bg-white px-6 md:px-9 py-6 md:py-9 border-b border-slate-200">
                         <!-- タイトルライン -->
@@ -1729,28 +1701,26 @@
                     </div>
                     </div>
 
-                    <!-- ④ 認証情報統合フッター -->
+                    <!-- ④ フッター（CTA＋認証情報ミニ） -->
                     <div class="px-6 md:px-9 py-6 border-t" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(6px); border-color: #E5E7EB;">
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-                            <div class="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-6">
+                            <div class="flex items-center">
                                 <button onclick="closePortfolioDetail()" class="btn btn-secondary text-body-small">閉じる</button>
-                                
+                            </div>
+                            
+                            <div class="w-full sm:w-auto flex items-center justify-center gap-3">
                                 ${project.basicAuth ? `
-                                <div class="flex items-center gap-3 text-sm text-white/80">
-                                    <svg class="w-4 h-4 text-white/90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
-                                    </svg>
-                                    <span>認証：<span class="font-mono text-white">ID ${project.authId}</span> / <span class="font-mono text-white">PW ${project.authPassword}</span></span>
-                                    <button onclick="navigator.clipboard.writeText('ID: ${project.authId}\\nPW: ${project.authPassword}').then(() => { const toast = document.createElement('div'); toast.textContent = 'コピーしました'; toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50'; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2000); })" class="text-white/60 hover:text-white p-1 rounded hover:bg-white/10">
-                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <div class="flex items-center gap-2 text-caption text-slate-600">
+                                    <span class="font-mono">ID hiroshift</span>
+                                    <span class="text-slate-400">/</span>
+                                    <span class="font-mono">PW 2025</span>
+                                    <button aria-label="認証情報をコピー" onclick="navigator.clipboard.writeText('ID: hiroshift\\nPW: 2025').then(() => { const toast = document.createElement('div'); toast.textContent = '認証情報をコピーしました'; toast.className = 'fixed top-4 right-4 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-50'; document.body.appendChild(toast); setTimeout(() => toast.remove(), 2000); })" class="p-1 rounded hover:bg-slate-100">
+                                        <svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                                         </svg>
                                     </button>
                                 </div>
                                 ` : ''}
-                            </div>
-                            
-                            <div class="flex justify-end">
                                 <a href="${project.url}" target="_blank" rel="noopener noreferrer" class="btn btn-primary text-body-small" style="padding: 12px 24px; border-radius: 12px;">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path>
